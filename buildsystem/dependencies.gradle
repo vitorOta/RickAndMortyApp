@@ -15,13 +15,14 @@ ext {
     androidVersionName = "1.0"
 
     //Libraries
-    //kotlinVersion came from Project build.gradle
+    /*kotlinVersion came from Project build.gradle*/
     appCompatVersion = '1.0.0'
+    materialVersion = '1.0.0-rc01'
 
     //testing
     jUnitVersion = '4.12'
-    testRunnerVersion = '1.0.2'
-    espressoVersion = '3.0.2'
+    testRunnerVersion = '1.1.1'
+    espressoVersion = '3.1.1'
 
 
     //**************************************************************************
@@ -30,6 +31,7 @@ ext {
     allDependencies = [
             kotlin : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
             appCompat : "androidx.appcompat:appcompat:$appCompatVersion",
+            material: "com.google.android.material:material:$materialVersion"
     ]
 
     allKaptDependencies = []
@@ -39,8 +41,8 @@ ext {
     ]
 
     allAndroidTestDependencies = [
-            testRunner : "com.android.support.test:runner:$testRunnerVersion",
-            espressoCore : "com.android.support.test.espresso:espresso-core:$espressoVersion"
+            testRunner : "androidx.test:runner:$testRunnerVersion",
+            espressoCore : "androidx.test.espresso:espresso-core::$espressoVersion"
     ]
 
 
@@ -50,6 +52,7 @@ ext {
     appDependencies = [
             allDependencies.kotlin,
             allDependencies.appCompat,
+            allDependencies.material,
     ]
     appKapt = []
     appTestDependencies = [

@@ -15,7 +15,7 @@ android {
         applicationId config["androidApplicationId"]
         versionCode config["androidVersionCode"]
         versionName config["androidVersionName"]
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -28,6 +28,11 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+
+
+    /****************************************
+     * Dependecies from dependencies.gradle *
+     ****************************************/
     def labelDependencies = "${project.name}Dependencies"
     def labelTestDependencies = "${project.name}TestDependencies"
     def labelAndroidTestDependencies = "${project.name}AndroidTestDependencies"
@@ -42,4 +47,9 @@ dependencies {
     testDependencies.each { v -> testImplementation v}
     androidTestDependencies.each { v -> androidTestImplementation v}
     _kapt.each { v -> kapt v}
+
+    /******* end *******/
+
+    implementation "com.android.support:appcompat-v7:27.1.0" //TODO remove this (search how to solve the problem about Theme) (remove this line and see the error)
+
 }
