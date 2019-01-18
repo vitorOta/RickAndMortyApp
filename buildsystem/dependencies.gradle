@@ -1,0 +1,76 @@
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+ext {
+    //Android
+    androidCompileSdkVersion = 28
+    androidApplicationId = "com.vitorota.rickandmorty"
+    androidMinSdkVersion = 15
+    androidTargetSdkVersion = 28
+    androidVersionCode = 1
+    androidVersionName = "1.0"
+
+    //Libraries
+    //kotlinVersion came from Project build.gradle
+    appCompatVersion = '1.0.0'
+
+    //testing
+    jUnitVersion = '4.12'
+    testRunnerVersion = '1.0.2'
+    espressoVersion = '3.0.2'
+
+
+    //**************************************************************************
+    // ALL DEPENDENCIES - DECLARE HERE AND REUSE WHERE IS NEEDED
+    //**************************************************************************
+    allDependencies = [
+            kotlin : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
+            appCompat : "androidx.appcompat:appcompat:$appCompatVersion",
+    ]
+
+    allKaptDependencies = []
+
+    allTestDependencies = [
+            jUnit : "junit:junit:$jUnitVersion",
+    ]
+
+    allAndroidTestDependencies = [
+            testRunner : "com.android.support.test:runner:$testRunnerVersion",
+            espressoCore : "com.android.support.test.espresso:espresso-core:$espressoVersion"
+    ]
+
+
+    //**************************************************************************
+    // APP DEPENDENCIES
+    //**************************************************************************
+    appDependencies = [
+            allDependencies.kotlin,
+            allDependencies.appCompat,
+    ]
+    appKapt = []
+    appTestDependencies = [
+            allTestDependencies.jUnit,
+    ]
+    appAndroidTestDependencies = [
+            allAndroidTestDependencies.testRunner,
+            allAndroidTestDependencies.espressoCore,
+    ]
+
+    //**************************************************************************
+    // DATA DEPENDENCIES
+    //**************************************************************************
+    dataDependencies = []
+    dataKapt = []
+    dataTestDependencies = []
+
+    //**************************************************************************
+    // DOMAIN DEPENDENCIES
+    //**************************************************************************
+    domainDependencies = []
+    domainKapt = []
+    domainTestDependencies = []
+}
