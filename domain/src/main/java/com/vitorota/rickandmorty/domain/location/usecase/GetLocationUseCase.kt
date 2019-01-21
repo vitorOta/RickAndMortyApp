@@ -10,8 +10,8 @@ import com.vitorota.rickandmorty.data.location.usecase.GetLocationUseCase.Params
  * @author Vitor Ota
  * @since 17/01/2019
  */
-class GetLocationUseCase(val repo: LocationRepository) : UseCase<Location, Params> {
-    override fun execute(params: Params): Location = repo.get(params.id)
+class GetLocationUseCase(private val repo: LocationRepository) : UseCase<Location?, Params> {
+    override fun execute(params: Params): Location? = repo.get(params.id)
 
     data class Params(val id: Int)
 }

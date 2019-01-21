@@ -24,5 +24,5 @@ data class Location(
     var name: String,
     var type: String,
     var dimension: String,
-    var residents: List<String>
+    var residents: List<String>?
 ) : BaseEntity(id)

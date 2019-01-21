@@ -14,6 +14,9 @@ ext {
 
     //testing
     jUnitVersion = '4.12'
+    mockkVersion = '1.9.kotlin12'
+
+    //androidTesting
     testRunnerVersion = '1.1.1'
     espressoVersion = '3.1.1'
 
@@ -31,11 +34,13 @@ ext {
 
     allTestDependencies = [
             jUnit : "junit:junit:$jUnitVersion",
+            mockk: "io.mockk:mockk:$mockkVersion",
     ]
 
     allAndroidTestDependencies = [
             testRunner : "androidx.test:runner:$testRunnerVersion",
-            espressoCore : "androidx.test.espresso:espresso-core:$espressoVersion"
+            espressoCore : "androidx.test.espresso:espresso-core:$espressoVersion",
+            mockkAndroid: "io.mockk:mockk-android:$mockkVersion",
     ]
 
 
@@ -62,11 +67,14 @@ ext {
     dataDependencies = [
             allDependencies.kotlin,
     ]
-    dataKapt = []
     dataTestDependencies = [
             allTestDependencies.jUnit
     ]
+    /*
+    //if the module don't use, isn't need to declare empty arrays
+    dataKapt = []
     dataAndroidTestDependencies = []
+    */
 
     //**************************************************************************
     // DOMAIN DEPENDENCIES
@@ -74,9 +82,12 @@ ext {
     domainDependencies = [
             allDependencies.kotlin,
     ]
-    domainKapt = []
     domainTestDependencies = [
-            allTestDependencies.jUnit
+            allTestDependencies.jUnit,
+            allTestDependencies.mockk,
     ]
+    /*
+    domainKapt = []
     domainAndroidTestDependencies = []
+     */
 }

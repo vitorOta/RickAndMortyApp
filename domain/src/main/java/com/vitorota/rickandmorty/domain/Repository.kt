@@ -7,5 +7,5 @@ package com.vitorota.rickandmorty.data
  */
 interface Repository<T:BaseEntity> {
     fun list(page: Int = 1): List<T>
-    fun get(id: Int): T
+    fun get(id: Int): T?
 }

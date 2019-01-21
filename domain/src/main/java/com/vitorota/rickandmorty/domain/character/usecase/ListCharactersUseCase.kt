@@ -12,7 +12,7 @@ import com.vitorota.rickandmorty.data.character.repository.CharacterRepository
 class ListCharactersUseCase(private val repo: CharacterRepository) :
     UseCase<List<Character>?, ListCharactersUseCase.Params> {
 
-    override fun execute(params: Params): List<Character>? = repo.list(params.page)
+    override fun execute(params: Params): List<Character> = repo.list(params.page)
 
     data class Params(val page: Int = 1)
 }
