@@ -5,7 +5,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 
-apply from:"${rootProject.projectDir}/buildsystem/dependenciesScript.gradle"
+apply from: rootProject.file("buildsystem/dependenciesScript.gradle")
 
 //sourceCompatibility = "7"
 //targetCompatibility = "7"
