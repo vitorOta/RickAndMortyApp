@@ -1,10 +1,3 @@
-allprojects {
-    repositories {
-        google()
-        jcenter()
-    }
-}
-
 ext {
     //Android
     androidCompileSdkVersion = 28
@@ -31,7 +24,7 @@ ext {
     allDependencies = [
             kotlin : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
             appCompat : "androidx.appcompat:appcompat:$appCompatVersion",
-            material: "com.google.android.material:material:$materialVersion"
+            material: "com.google.android.material:material:$materialVersion",
     ]
 
     allKaptDependencies = []
@@ -42,7 +35,7 @@ ext {
 
     allAndroidTestDependencies = [
             testRunner : "androidx.test:runner:$testRunnerVersion",
-            espressoCore : "androidx.test.espresso:espresso-core::$espressoVersion"
+            espressoCore : "androidx.test.espresso:espresso-core:$espressoVersion"
     ]
 
 
@@ -66,14 +59,24 @@ ext {
     //**************************************************************************
     // DATA DEPENDENCIES
     //**************************************************************************
-    dataDependencies = []
+    dataDependencies = [
+            allDependencies.kotlin,
+    ]
     dataKapt = []
-    dataTestDependencies = []
+    dataTestDependencies = [
+            allTestDependencies.jUnit
+    ]
+    dataAndroidTestDependencies = []
 
     //**************************************************************************
     // DOMAIN DEPENDENCIES
     //**************************************************************************
-    domainDependencies = []
+    domainDependencies = [
+            allDependencies.kotlin,
+    ]
     domainKapt = []
-    domainTestDependencies = []
+    domainTestDependencies = [
+            allTestDependencies.jUnit
+    ]
+    domainAndroidTestDependencies = []
 }
