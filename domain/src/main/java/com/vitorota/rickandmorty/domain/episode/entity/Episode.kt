@@ -23,7 +23,5 @@ class Episode(
     var name:String,
     var air_date:Date, //TODO change this variable name to camelCase
     var episode:String,
-    var characters:List<String>,
-    var url:String,
-    var created:String
+    var characters:List<String>
 ): BaseEntity(id)
