@@ -1,6 +1,5 @@
 package com.vitorota.rickandmorty.data.episode.entity
 
-import com.vitorota.rickandmorty.data.BaseEntity
 import java.util.*
 
 /**
@@ -19,9 +18,9 @@ url	string (url)	Link to the episode's own endpoint.
 created	string	Time at which the episode was created in the database.
 */
 class Episode(
-    override var id:Int,
+    var id:Int,
     var name:String,
-    var air_date:Date, //TODO change this variable name to camelCase
+    var airDate:Date,
     var episode:String,
     var characters:List<String>?
-): BaseEntity(id)
+)

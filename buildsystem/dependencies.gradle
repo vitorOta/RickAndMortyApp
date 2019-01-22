@@ -11,6 +11,12 @@ ext {
     /*kotlinVersion came from Project build.gradle*/
     appCompatVersion = '1.0.0'
     materialVersion = '1.0.0-rc01'
+    retrofitVersion = '2.5.0'
+    roomVersion = '2.1.0-alpha03'
+    daggerVersion = '2.21'
+    kotlinCoroutinesVersion = '1.1.0'
+    kotlinCoroutinesRetrofitAdapterVersion = '0.9.2'
+    timberVersion = '4.7.1'
 
     //testing
     jUnitVersion = '4.12'
@@ -20,39 +26,59 @@ ext {
     testRunnerVersion = '1.1.1'
     espressoVersion = '3.1.1'
 
-
     //**************************************************************************
     // ALL DEPENDENCIES - DECLARE HERE AND REUSE WHERE IS NEEDED
     //**************************************************************************
     allDependencies = [
-            kotlin : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
-            appCompat : "androidx.appcompat:appcompat:$appCompatVersion",
-            material: "com.google.android.material:material:$materialVersion",
+            //kotlin
+            kotlin                         : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
+            kotlinCoroutines               : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutinesVersion",
+            //support
+            appCompat                      : "androidx.appcompat:appcompat:$appCompatVersion",
+            material                       : "com.google.android.material:material:$materialVersion",
+            //Architecture Components
+            room                           : "androidx.room:room-runtime:$roomVersion",
+            //network
+            retrofit                       : "com.squareup.retrofit2:retrofit:$retrofitVersion",
+            retrofitGsonConverter          : "com.squareup.retrofit2:converter-gson:$retrofitVersion",
+            kotlinCoroutinesRetrofitAdapter: "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$kotlinCoroutinesRetrofitAdapterVersion",
+            //di
+            dagger                         : "com.google.dagger:dagger:$daggerVersion",
+            //logging
+            timber: "com.jakewharton.timber:timber:$timberVersion",
+
     ]
 
-    allKaptDependencies = []
+    allKaptDependencies = [
+            roomCompiler  : "androidx.room:room-compiler:$roomVersion",
+            daggerCompiler: "com.google.dagger:dagger-compiler:$daggerVersion",
+    ]
 
     allTestDependencies = [
-            jUnit : "junit:junit:$jUnitVersion",
+            jUnit: "junit:junit:$jUnitVersion",
             mockk: "io.mockk:mockk:$mockkVersion",
     ]
 
     allAndroidTestDependencies = [
-            testRunner : "androidx.test:runner:$testRunnerVersion",
-            espressoCore : "androidx.test.espresso:espresso-core:$espressoVersion",
+            testRunner  : "androidx.test:runner:$testRunnerVersion",
+            espressoCore: "androidx.test.espresso:espresso-core:$espressoVersion",
             mockkAndroid: "io.mockk:mockk-android:$mockkVersion",
     ]
-
 
     //**************************************************************************
     // APP DEPENDENCIES
     //**************************************************************************
     appDependencies = [
             allDependencies.kotlin,
+            allDependencies.kotlinCoroutines,
             allDependencies.appCompat,
             allDependencies.material,
+            allDependencies.dagger,
+            allDependencies.timber,
     ]
-    appKapt = []
+    appKapt = [
+            allKaptDependencies.daggerCompiler,
+    ]
     appTestDependencies = [
             allTestDependencies.jUnit,
     ]
@@ -66,15 +92,23 @@ ext {
     //**************************************************************************
     dataDependencies = [
             allDependencies.kotlin,
+            allDependencies.kotlinCoroutines,
+            allDependencies.kotlinCoroutinesRetrofitAdapter,
+            allDependencies.appCompat,
+            allDependencies.retrofit,
+            allDependencies.retrofitGsonConverter,
+            allDependencies.dagger,
+            allDependencies.timber,
+    ]
+    dataKapt = [
+            allKaptDependencies.daggerCompiler,
     ]
     dataTestDependencies = [
-            allTestDependencies.jUnit
+            allTestDependencies.jUnit,
     ]
-    /*
-    //if the module don't use, isn't need to declare empty arrays
-    dataKapt = []
-    dataAndroidTestDependencies = []
-    */
+    dataAndroidTestDependencies = [
+            allAndroidTestDependencies.testRunner,
+    ]
 
     //**************************************************************************
     // DOMAIN DEPENDENCIES

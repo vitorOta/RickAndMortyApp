@@ -1,8 +1,5 @@
 package com.vitorota.rickandmorty.data.location.entity
 
-import com.vitorota.rickandmorty.data.BaseEntity
-import java.util.*
-
 /**
  *
  * @author Vitor Ota
@@ -20,9 +17,9 @@ created	string	Time at which the location was created in the database.
 */
 
 data class Location(
-    override var id: Int,
+    var id: Int,
     var name: String,
     var type: String,
     var dimension: String,
     var residents: List<String>?
-) : BaseEntity(id)
+)

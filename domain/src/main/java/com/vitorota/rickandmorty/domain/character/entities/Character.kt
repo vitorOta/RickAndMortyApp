@@ -1,6 +1,5 @@
 package com.vitorota.rickandmorty.data.character.entity
 
-import com.vitorota.rickandmorty.data.BaseEntity
 import com.vitorota.rickandmorty.data.episode.entity.Episode
 import com.vitorota.rickandmorty.data.location.entity.Location
 
@@ -26,7 +25,7 @@ url	string (url)	Link to the character's own URL endpoint.
 */
 
 data class Character(
-    override var id: Int,
+    var id: Int,
     var name: String,
     var status: String,
     var species: String,
@@ -36,4 +35,4 @@ data class Character(
     var location: Location?,
     var image: String,
     var episode: List<Episode>?
-) : BaseEntity(id)
+)
