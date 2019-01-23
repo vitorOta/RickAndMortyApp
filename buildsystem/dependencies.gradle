@@ -32,7 +32,8 @@ ext {
     allDependencies = [
             //kotlin
             kotlin                         : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
-            kotlinCoroutines               : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutinesVersion",
+            kotlinCoroutines               : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutinesVersion",
+            kotlinCoroutinesAndroid        : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutinesVersion",
             //support
             appCompat                      : "androidx.appcompat:appcompat:$appCompatVersion",
             material                       : "com.google.android.material:material:$materialVersion",
@@ -45,7 +46,7 @@ ext {
             //di
             dagger                         : "com.google.dagger:dagger:$daggerVersion",
             //logging
-            timber: "com.jakewharton.timber:timber:$timberVersion",
+            timber                         : "com.jakewharton.timber:timber:$timberVersion",
 
     ]
 
@@ -70,7 +71,7 @@ ext {
     //**************************************************************************
     appDependencies = [
             allDependencies.kotlin,
-            allDependencies.kotlinCoroutines,
+            allDependencies.kotlinCoroutinesAndroid,
             allDependencies.appCompat,
             allDependencies.material,
             allDependencies.dagger,
@@ -92,13 +93,13 @@ ext {
     //**************************************************************************
     dataDependencies = [
             allDependencies.kotlin,
-            allDependencies.kotlinCoroutines,
             allDependencies.kotlinCoroutinesRetrofitAdapter,
             allDependencies.appCompat,
             allDependencies.retrofit,
             allDependencies.retrofitGsonConverter,
             allDependencies.dagger,
             allDependencies.timber,
+            allDependencies.kotlinCoroutines,
     ]
     dataKapt = [
             allKaptDependencies.daggerCompiler,
@@ -115,6 +116,7 @@ ext {
     //**************************************************************************
     domainDependencies = [
             allDependencies.kotlin,
+            allDependencies.kotlinCoroutines,
     ]
     domainTestDependencies = [
             allTestDependencies.jUnit,

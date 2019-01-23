@@ -3,11 +3,14 @@ package com.vitorota.rickandmorty.domain.character
 import com.vitorota.rickandmorty.data.character.repository.CharacterRepository
 import com.vitorota.rickandmorty.data.character.usecase.GetCharacterUseCase
 import com.vitorota.rickandmorty.domain.mockCharacters
+import io.mockk.MockKAnnotations
+import io.mockk.coEvery
 import io.mockk.every
-import io.mockk.mockk
+import io.mockk.impl.annotations.MockK
 import io.mockk.slot
 import junit.framework.TestCase.assertNull
 import junit.framework.TestCase.assertSame
+import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 
@@ -18,6 +21,7 @@ import org.junit.Test
  */
 class GetCharacterUseCaseTest {
 
+    @MockK
     private lateinit var repository: CharacterRepository
 
     private lateinit var useCase: GetCharacterUseCase
@@ -27,12 +31,12 @@ class GetCharacterUseCaseTest {
     @Before
     fun setup() {
 
-        repository = mockk()
+        MockKAnnotations.init(this)
 
         val slot = slot<Int>()
 
         every {
-            repository.get(capture(slot))
+            runBlocking { repository.get(capture(slot)) }
         } answers {
             data.find { item -> item.id == slot.captured }
         }
@@ -41,7 +45,7 @@ class GetCharacterUseCaseTest {
     }
 
     @Test
-    fun `get existent character details successfully`() {
+    fun `get existent character details successfully`() = runBlocking {
         val id = 1
 
         val character = useCase.execute(GetCharacterUseCase.Params(id))
@@ -49,7 +53,7 @@ class GetCharacterUseCaseTest {
     }
 
     @Test
-    fun `get inexistent character, should throw exception`() {
+    fun `get inexistent character, should throw exception`() = runBlocking {
         val id = 10
         val character = useCase.execute(GetCharacterUseCase.Params(id))
         assertNull(character)

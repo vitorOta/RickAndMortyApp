@@ -10,7 +10,7 @@ import com.vitorota.rickandmorty.data.episode.repository.EpisodeRepository
  * @since 17/01/2019
  */
 class GetEpisodeUseCase(private val repo: EpisodeRepository) : UseCase<Episode?, GetEpisodeUseCase.Params> {
-    override fun execute(params: GetEpisodeUseCase.Params): Episode? = repo.get(params.id)
+    suspend override fun execute(params: GetEpisodeUseCase.Params): Episode? = repo.get(params.id)
 
     data class Params(val id: Int)
 }
