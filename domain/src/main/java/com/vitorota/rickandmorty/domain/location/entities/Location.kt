@@ -19,7 +19,7 @@ created	string	Time at which the location was created in the database.
 data class Location(
     var id: Int,
     var name: String,
-    var type: String,
-    var dimension: String,
+    var type: String?,
+    var dimension: String?,
     var residents: List<String>?
 )

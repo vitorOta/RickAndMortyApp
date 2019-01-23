@@ -1,8 +1,10 @@
 package com.vitorota.rickandmorty.data.network.requests
 
 import com.vitorota.rickandmorty.data.util.exceptions.DataException
+import com.vitorota.rickandmorty.data.util.exceptions.DataHttpException
 import com.vitorota.rickandmorty.data.util.exceptions.DataIOException
 import kotlinx.coroutines.Deferred
+import retrofit2.HttpException
 import timber.log.Timber
 import java.io.IOException
 
@@ -17,12 +19,14 @@ class SynchronousRequestManagerImpl<T> : SynchronousRequestManager<T> {
         try {
             val result = deferred.await()
             return result
-        } catch (e: IOException) {
-            Timber.d(e.message)
-            throw DataIOException(e.message, e)
         } catch (e: Exception) {
             Timber.d(e.message)
-            throw e
+            when (e) {
+                is IOException -> throw DataIOException(e.message, e)
+                is HttpException -> throw DataHttpException(e.message, e.code(), e)
+                else -> throw e
+            }
+
         }
     }
 }

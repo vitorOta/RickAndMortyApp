@@ -11,8 +11,8 @@ import com.vitorota.rickandmorty.data.location.entity.Location
 data class LocationSchema(
     var id: Int,
     var name: String,
-    var type: String,
-    var dimension: String,
+    var type: String?,
+    var dimension: String?,
     var residents: List<String>?
 ):Schema<Location> {
     override fun toDomain(): Location =

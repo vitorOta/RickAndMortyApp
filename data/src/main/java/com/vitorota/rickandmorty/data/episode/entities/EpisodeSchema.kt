@@ -13,8 +13,8 @@ import java.util.*
 data class EpisodeSchema(
     var id:Int,
     var name:String,
-    @SerializedName("air_date") var airDate: Date,
-    var episode:String,
+    @SerializedName("air_date") var airDate: Date?,
+    var episode:String?,
     var characters:List<String>?
 ): Schema<Episode> {
     override fun toDomain(): Episode =

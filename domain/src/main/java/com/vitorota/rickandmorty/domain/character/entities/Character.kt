@@ -34,5 +34,5 @@ data class Character(
     var origin: Episode?,
     var location: Location?,
     var image: String,
-    var episode: List<Episode>?
+    var episode: List<String>?
 )

@@ -20,7 +20,7 @@ created	string	Time at which the episode was created in the database.
 class Episode(
     var id:Int,
     var name:String,
-    var airDate:Date,
-    var episode:String,
+    var airDate:Date?,
+    var episode:String?,
     var characters:List<String>?
 )

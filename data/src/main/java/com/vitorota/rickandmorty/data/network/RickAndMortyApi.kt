@@ -1,5 +1,6 @@
 package com.vitorota.rickandmorty.data.network
 
+import com.vitorota.rickandmorty.data.ListResponse
 import com.vitorota.rickandmorty.data.character.entities.CharacterSchema
 import com.vitorota.rickandmorty.data.episode.entities.EpisodeSchema
 import com.vitorota.rickandmorty.data.location.entities.LocationSchema
@@ -21,7 +22,7 @@ interface RickAndMortyApi {
     fun getCharacter(@Path("id") id: Int): Deferred<CharacterSchema>
 
     @GET("character")
-    fun listCharacters(@Query("page") page: Int): Deferred<List<CharacterSchema>>
+    fun listCharacters(@Query("page") page: Int): Deferred<ListResponse<CharacterSchema>>
 
 //endregion
 
@@ -31,7 +32,7 @@ interface RickAndMortyApi {
     fun getEpisode(@Path("id") id: Int): Deferred<EpisodeSchema>
 
     @GET("episode")
-    fun listEpisodes(@Query("page") page: Int): Deferred<List<EpisodeSchema>>
+    fun listEpisodes(@Query("page") page: Int): Deferred<ListResponse<EpisodeSchema>>
 
 //endregion
 
@@ -41,7 +42,7 @@ interface RickAndMortyApi {
     fun getLocation(@Path("id") id: Int): Deferred<LocationSchema>
 
     @GET("location")
-    fun listLocations(@Query("page") page: Int): Deferred<List<LocationSchema>>
+    fun listLocations(@Query("page") page: Int): Deferred<ListResponse<LocationSchema>>
 
 //endregion
 }

@@ -7,7 +7,5 @@ import java.lang.Exception
  * @author Vitor Ota
  * @since 22/01/2019
  */
-abstract class DataException : Exception {
-    constructor(message: String?): super(message)
-    constructor(message: String?, cause: Throwable): super(message, cause)
+abstract class DataException(message:String?, cause:Throwable?=null) : Exception(message, cause) {
 }
