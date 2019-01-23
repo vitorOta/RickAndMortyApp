@@ -1,7 +1,7 @@
 package com.vitorota.rickandmorty.data.character.repository
 
 import com.vitorota.rickandmorty.data.network.ApiClientBuilder
-import com.vitorota.rickandmorty.data.network.api.CharacterApi
+import com.vitorota.rickandmorty.data.network.RickAndMortyApi
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Before
@@ -14,7 +14,7 @@ import org.junit.Test
  */
 class CharacterCloudRepositoryTest {
     private lateinit var server: MockWebServer
-    private lateinit var api: CharacterApi
+    private lateinit var api: RickAndMortyApi
     private lateinit var repo: CharacterCloudRepository
 
 
@@ -25,7 +25,7 @@ class CharacterCloudRepositoryTest {
 
         val url = server.url("/").toString()
 
-        api = ApiClientBuilder.createServiceApi(CharacterApi::class.java, url)
+        api = ApiClientBuilder.createServiceApi(RickAndMortyApi::class.java, url)
         repo = CharacterCloudRepository(api)
     }
 
