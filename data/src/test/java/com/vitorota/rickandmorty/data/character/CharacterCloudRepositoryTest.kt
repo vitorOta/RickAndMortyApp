@@ -26,6 +26,8 @@ class CharacterCloudRepositoryTest {
     private lateinit var api: RickAndMortyApi
     private lateinit var repo: CharacterCloudRepository
 
+    private val filePrefix:String = "character"
+
 
     @Before
     fun setup() {
@@ -48,7 +50,7 @@ class CharacterCloudRepositoryTest {
 
         //region arrange
         val id = 1
-        val response = loadJsonFromResources("character_get_$id.json")
+        val response = loadJsonFromResources("${filePrefix}_get_$id.json")
         server.enqueueResponse(200, response)
         //endregion
 
@@ -71,7 +73,7 @@ class CharacterCloudRepositoryTest {
         val id = 99999
         val response =
             try {
-                loadJsonFromResources("character_get_$id.json")
+                loadJsonFromResources("${filePrefix}_get_$id.json")
             } catch (e: IllegalStateException) {
                 "{\"error\":\"Character not found\"}"
             }
@@ -95,7 +97,7 @@ class CharacterCloudRepositoryTest {
     fun `list response from page (1) successfully`() = runBlocking {
         //region arrange
         val page = 1
-        val response = loadJsonFromResources("character_list_$page.json")
+        val response = loadJsonFromResources("${filePrefix}_list_$page.json")
         server.enqueueResponse(200, response)
         //endregion
 
@@ -117,7 +119,7 @@ class CharacterCloudRepositoryTest {
         val page = 99999
         val response =
             try {
-                loadJsonFromResources("character_list_$page.json")
+                loadJsonFromResources("${filePrefix}_list_$page.json")
             } catch (e: IllegalStateException) {
                 "{\"error\":\"There is nothing here\"}"
             }

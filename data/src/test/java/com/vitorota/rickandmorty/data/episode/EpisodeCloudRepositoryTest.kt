@@ -24,6 +24,7 @@ class EpisodeCloudRepositoryTest {
     private lateinit var api: RickAndMortyApi
     private lateinit var repo: EpisodeCloudRepository
 
+    private val filePrefix = "episode"
 
     @Before
     fun setup() {
@@ -46,7 +47,7 @@ class EpisodeCloudRepositoryTest {
 
         //region arrange
         val id = 1
-        val response = loadJsonFromResources("episode_get_$id.json")
+        val response = loadJsonFromResources("${filePrefix}_get_$id.json")
         server.enqueueResponse(200, response)
         //endregion
 
@@ -68,7 +69,7 @@ class EpisodeCloudRepositoryTest {
         val id = 99999
         val response =
             try {
-                loadJsonFromResources("episode_get_$id.json")
+                loadJsonFromResources("${filePrefix}_get_$id.json")
             } catch (e: IllegalStateException) {
                 "{\"error\":\"Episode not found\"}"
             }
@@ -92,7 +93,7 @@ class EpisodeCloudRepositoryTest {
     fun `list response from page (1) successfully`() = runBlocking {
         //region arrange
         val page = 1
-        val response = loadJsonFromResources("episode_list_$page.json")
+        val response = loadJsonFromResources("${filePrefix}_list_$page.json")
         server.enqueueResponse(200, response)
         //endregion
 
@@ -114,7 +115,7 @@ class EpisodeCloudRepositoryTest {
         val page = 99999
         val response =
             try {
-                loadJsonFromResources("episode_list_$page.json")
+                loadJsonFromResources("${filePrefix}_list_$page.json")
             } catch (e: IllegalStateException) {
                 "{\"error\":\"There is nothing here\"}"
             }
