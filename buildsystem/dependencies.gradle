@@ -21,6 +21,7 @@ ext {
     //testing
     jUnitVersion = '4.12'
     mockkVersion = '1.9.kotlin12'
+    mockwebserverVersion = '3.12.1'
 
     //androidTesting
     testRunnerVersion = '1.1.1'
@@ -58,6 +59,7 @@ ext {
     allTestDependencies = [
             jUnit: "junit:junit:$jUnitVersion",
             mockk: "io.mockk:mockk:$mockkVersion",
+            mockwebserver  : "com.squareup.okhttp3:mockwebserver:$mockwebserverVersion",
     ]
 
     allAndroidTestDependencies = [
@@ -106,10 +108,9 @@ ext {
     ]
     dataTestDependencies = [
             allTestDependencies.jUnit,
+            allTestDependencies.mockwebserver,
     ]
-    dataAndroidTestDependencies = [
-            allAndroidTestDependencies.testRunner,
-    ]
+
 
     //**************************************************************************
     // DOMAIN DEPENDENCIES

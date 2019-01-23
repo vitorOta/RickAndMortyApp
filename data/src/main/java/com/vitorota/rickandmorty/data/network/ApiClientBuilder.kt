@@ -19,7 +19,7 @@ class ApiClientBuilder {
         private lateinit var retrofit: Retrofit
         private lateinit var clientBuilder: OkHttpClient.Builder
 
-        fun <S> createService(
+        fun <S> createServiceApi(
             serviceClass: Class<S>,
             baseUrl: String,
             gson: Gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").create(),
@@ -32,6 +32,7 @@ class ApiClientBuilder {
 
             val client = clientBuilder.build()
             retrofit = Retrofit.Builder()
+                .client(client)
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
