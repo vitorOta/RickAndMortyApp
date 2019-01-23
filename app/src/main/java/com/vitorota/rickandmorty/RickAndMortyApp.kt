@@ -19,6 +19,8 @@ class RickAndMortyApp : Application() {
     private fun setupTimber() {
         if (BuildConfig.DEBUG) {
             plant(Timber.DebugTree())
+        }else{
+            //TODO Crash reporting three logging for production app
         }
     }
 
