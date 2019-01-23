@@ -1,8 +1,9 @@
 package com.vitorota.rickandmorty.data.character.repository
 
 import com.vitorota.rickandmorty.data.ListResponse
-import com.vitorota.rickandmorty.data.character.entities.CharacterSchema
-import com.vitorota.rickandmorty.data.character.entity.Character
+import com.vitorota.rickandmorty.data.location.entities.LocationSchema
+import com.vitorota.rickandmorty.data.location.entity.Location
+import com.vitorota.rickandmorty.data.location.repository.LocationCloudRepository
 import com.vitorota.rickandmorty.data.network.ApiClientBuilder
 import com.vitorota.rickandmorty.data.network.RickAndMortyApi
 import com.vitorota.rickandmorty.data.util.enqueueResponse
@@ -21,10 +22,10 @@ import org.junit.Test
  * @author Vitor Ota
  * @since 23/01/2019
  */
-class CharacterCloudRepositoryTest {
+class LocationCloudRepositoryTest {
     private lateinit var server: MockWebServer
     private lateinit var api: RickAndMortyApi
-    private lateinit var repo: CharacterCloudRepository
+    private lateinit var repo: LocationCloudRepository
 
 
     @Before
@@ -35,7 +36,7 @@ class CharacterCloudRepositoryTest {
         val url = server.url("/").toString()
 
         api = ApiClientBuilder.createServiceApi(RickAndMortyApi::class.java, url)
-        repo = CharacterCloudRepository(api)
+        repo = LocationCloudRepository(api)
     }
 
     @After
@@ -48,19 +49,19 @@ class CharacterCloudRepositoryTest {
 
         //region arrange
         val id = 1
-        val response = loadJsonFromResources("character_get_$id.json")
+        val response = loadJsonFromResources("location_get_$id.json")
         server.enqueueResponse(200, response)
         //endregion
 
 
         //region act
-        val character: Character? = repo.get(id)
+        val item: Location? = repo.get(id)
         //endregion
 
         //region assert
-        assertNotNull(character)
-        assertEquals(character?.id, id)
-        assertEquals(character?.name, "Rick Sanchez")
+        assertNotNull(item)
+        assertEquals(id, item?.id)
+        assertEquals("Earth (C-137)", item?.name)
         //endregion
     }
 
@@ -71,9 +72,9 @@ class CharacterCloudRepositoryTest {
         val id = 99999
         val response =
             try {
-                loadJsonFromResources("character_get_$id.json")
+                loadJsonFromResources("location_get_$id.json")
             } catch (e: IllegalStateException) {
-                "{\"error\":\"Character not found\"}"
+                "{\"error\":\"Episode not found\"}"
             }
         server.enqueueResponse(404, response)
         //endregion
@@ -81,7 +82,7 @@ class CharacterCloudRepositoryTest {
 
         try {
             //region act
-            val character: Character? = repo.get(id)
+            val item: Location? = repo.get(id)
             fail()
             //endregion
         } catch (e: DataHttpException) {
@@ -95,29 +96,29 @@ class CharacterCloudRepositoryTest {
     fun `list response from page (1) successfully`() = runBlocking {
         //region arrange
         val page = 1
-        val response = loadJsonFromResources("character_list_$page.json")
+        val response = loadJsonFromResources("location_list_$page.json")
         server.enqueueResponse(200, response)
         //endregion
 
 
         //region act
-        val listResponse: ListResponse<CharacterSchema> = repo.listResponse(page)
+        val listResponse: ListResponse<LocationSchema> = repo.listResponse(page)
         //endregion
 
         //region assert
-        assertEquals("Rick Sanchez", listResponse.results.toDomain()[0].name)
-        assertEquals(493, listResponse.info.count)
-        assertEquals("https://rickandmortyapi.com/api/character/?page=2", listResponse.info.next)
+        assertEquals("Earth (C-137)", listResponse.results.toDomain()[0].name)
+        assertEquals(76, listResponse.info.count)
+        assertEquals("https://rickandmortyapi.com/api/location?page=2", listResponse.info.next)
         //endregion
     }
 
     @Test
-    fun `list characters from inexistent page (99999) should throw exception`() = runBlocking {
+    fun `list from inexistent page (99999) should throw exception`() = runBlocking {
         //region arrange
         val page = 99999
         val response =
             try {
-                loadJsonFromResources("character_list_$page.json")
+                loadJsonFromResources("location_list_$page.json")
             } catch (e: IllegalStateException) {
                 "{\"error\":\"There is nothing here\"}"
             }
@@ -126,7 +127,7 @@ class CharacterCloudRepositoryTest {
 
         try {
             //region act
-            val list: List<Character>? = repo.list(page)
+            val items: List<Location> = repo.list(page)
             fail()
             //endregion
         } catch (e: DataHttpException) {
