@@ -22,11 +22,11 @@ val mockCharacters = arrayListOf(
 
 
 val mockEpisodes = arrayListOf(
-    Episode(1, "Pilot", Calendar.Builder().setDate(2013, 12, 2).build().time, "S01E01", null),
-    Episode(2, "Lawnmower Dog", Calendar.Builder().setDate(2013, 12, 9).build().time, "S01E02", null),
-    Episode(3, "Anatomy Park", Calendar.Builder().setDate(2013, 12, 16).build().time, "S01E03", null),
-    Episode(4, "M. Night Shaym-Aliens!", Calendar.Builder().setDate(2014, 1, 13).build().time, "S01E04", null),
-    Episode(5, "Meeseeks and Destroy", Calendar.Builder().setDate(2014, 1, 20).build().time, "S01E05", null)
+    Episode(1, "Pilot", "December 2, 2013", "S01E01", null),
+    Episode(2, "Lawnmower Dog", "December 9, 2013", "S01E02", null),
+    Episode(3, "Anatomy Park", "December 16, 2013", "S01E03", null),
+    Episode(4, "M. Night Shaym-Aliens!", "January 13, 2014", "S01E04", null),
+    Episode(5, "Meeseeks and Destroy", "January 20, 2014", "S01E05", null)
 )
 
 
