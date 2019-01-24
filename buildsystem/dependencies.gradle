@@ -11,12 +11,18 @@ ext {
     /*kotlinVersion came from Project build.gradle*/
     appCompatVersion = '1.0.0'
     materialVersion = '1.0.0-rc01'
+    constraintLayoutVersion = '1.1.2'
+    recyclerViewVersion = '1.0.0'
+    cardViewVersion = '1.0.0'
     retrofitVersion = '2.5.0'
+    gsonVersion = '2.8.5'
     roomVersion = '2.1.0-alpha03'
+    lifecycleVersion = '2.0.0'
     daggerVersion = '2.21'
     kotlinCoroutinesVersion = '1.1.0'
     kotlinCoroutinesRetrofitAdapterVersion = '0.9.2'
     timberVersion = '4.7.1'
+    frescoVersion = '1.11.0'
 
     //testing
     jUnitVersion = '4.12'
@@ -38,28 +44,37 @@ ext {
             //support
             appCompat                      : "androidx.appcompat:appcompat:$appCompatVersion",
             material                       : "com.google.android.material:material:$materialVersion",
+            constraintLayout               : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
+            recyclerView                   : "androidx.recyclerview:recyclerview:$recyclerViewVersion",
+            cardView                       : "androidx.cardview:cardview:$cardViewVersion",
             //Architecture Components
             room                           : "androidx.room:room-runtime:$roomVersion",
+            lifecycle                      : "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion",
             //network
             retrofit                       : "com.squareup.retrofit2:retrofit:$retrofitVersion",
             retrofitGsonConverter          : "com.squareup.retrofit2:converter-gson:$retrofitVersion",
             kotlinCoroutinesRetrofitAdapter: "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$kotlinCoroutinesRetrofitAdapterVersion",
+            //parsing
+            gson                           : "com.google.code.gson:gson:$gsonVersion",
             //di
             dagger                         : "com.google.dagger:dagger:$daggerVersion",
             //logging
             timber                         : "com.jakewharton.timber:timber:$timberVersion",
+            //imageLoader
+            fresco                         : "com.facebook.fresco:fresco:$frescoVersion",
 
     ]
 
     allKaptDependencies = [
-            roomCompiler  : "androidx.room:room-compiler:$roomVersion",
-            daggerCompiler: "com.google.dagger:dagger-compiler:$daggerVersion",
+            roomCompiler     : "androidx.room:room-compiler:$roomVersion",
+            lifecycleCompiler: "android.arch.lifecycle:compiler:$lifecycleVersion",
+            daggerCompiler   : "com.google.dagger:dagger-compiler:$daggerVersion",
     ]
 
     allTestDependencies = [
-            jUnit: "junit:junit:$jUnitVersion",
-            mockk: "io.mockk:mockk:$mockkVersion",
-            mockwebserver  : "com.squareup.okhttp3:mockwebserver:$mockwebserverVersion",
+            jUnit        : "junit:junit:$jUnitVersion",
+            mockk        : "io.mockk:mockk:$mockkVersion",
+            mockwebserver: "com.squareup.okhttp3:mockwebserver:$mockwebserverVersion",
     ]
 
     allAndroidTestDependencies = [
@@ -73,14 +88,22 @@ ext {
     //**************************************************************************
     appDependencies = [
             allDependencies.kotlin,
+            allDependencies.kotlinCoroutines,
             allDependencies.kotlinCoroutinesAndroid,
             allDependencies.appCompat,
             allDependencies.material,
+            allDependencies.constraintLayout,
+            allDependencies.recyclerView,
+            allDependencies.cardView,
             allDependencies.dagger,
             allDependencies.timber,
+            allDependencies.fresco,
+            allDependencies.gson,
+            allDependencies.lifecycle
     ]
     appKapt = [
             allKaptDependencies.daggerCompiler,
+            allKaptDependencies.lifecycleCompiler,
     ]
     appTestDependencies = [
             allTestDependencies.jUnit,
@@ -110,7 +133,6 @@ ext {
             allTestDependencies.jUnit,
             allTestDependencies.mockwebserver,
     ]
-
 
     //**************************************************************************
     // DOMAIN DEPENDENCIES

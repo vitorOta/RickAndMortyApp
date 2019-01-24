@@ -12,7 +12,7 @@ import kotlinx.coroutines.Deferred
  * @author Vitor Ota
  * @since 22/01/2019
  */
-class EpisodeCloudRepository(api: RickAndMortyApi) : BaseCloudRepository<EpisodeSchema, Episode>(api) {
+class EpisodeCloudRepository(api: RickAndMortyApi) : BaseCloudRepository<EpisodeSchema, Episode>(api), EpisodeRepository {
     override val getMethod: (Int) -> Deferred<EpisodeSchema>
         get() = api::getEpisode
     override val listMethod: (Int) -> Deferred<ListResponse<EpisodeSchema>>

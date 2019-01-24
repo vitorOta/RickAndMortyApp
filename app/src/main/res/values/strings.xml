@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">RickAndMorty</string>
+    <string name="error_io">Ocorreu um erro, verifique sua conexão com a internet</string>
+    <string name="error_404">Não encontrado</string>
+    <string name="error_http_general">Ocorreu um erro, favor tentar novamente mais tarde</string>
 </resources>

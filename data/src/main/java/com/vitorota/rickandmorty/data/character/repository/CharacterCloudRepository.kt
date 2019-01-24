@@ -14,7 +14,7 @@ import javax.inject.Inject
  * @since 22/01/2019
  */
 class CharacterCloudRepository @Inject constructor(api: RickAndMortyApi) :
-    BaseCloudRepository<CharacterSchema, Character>(api) {
+    BaseCloudRepository<CharacterSchema, Character>(api), CharacterRepository {
     override val getMethod: (Int) -> Deferred<CharacterSchema>
         get() = api::getCharacter
     override val listMethod: (Int) -> Deferred<ListResponse<CharacterSchema>>

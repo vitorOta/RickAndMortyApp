@@ -12,7 +12,8 @@ import kotlinx.coroutines.Deferred
  * @author Vitor Ota
  * @since 22/01/2019
  */
-class LocationCloudRepository(api: RickAndMortyApi) : BaseCloudRepository<LocationSchema, Location>(api) {
+class LocationCloudRepository(api: RickAndMortyApi) : BaseCloudRepository<LocationSchema, Location>(api),
+    LocationRepository {
     override val getMethod: (Int) -> Deferred<LocationSchema>
         get() = api::getLocation
     override val listMethod: (Int) -> Deferred<ListResponse<LocationSchema>>
