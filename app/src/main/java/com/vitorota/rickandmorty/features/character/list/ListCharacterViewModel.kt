@@ -3,9 +3,7 @@ package com.vitorota.rickandmorty.features.character.list
 import com.vitorota.rickandmorty.data.character.entity.Character
 import com.vitorota.rickandmorty.data.character.usecase.ListCharactersUseCase
 import com.vitorota.rickandmorty.features.BaseViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
+import com.vitorota.rickandmorty.utils.asyncAwait
 import javax.inject.Inject
 
 /**
@@ -24,13 +22,9 @@ class ListCharacterViewModel : BaseViewModel<List<Character>>() {
 
     suspend fun loadCharacters() {
         doWorkWithProgress {
-            //asyncAwait
-            GlobalScope.async(Dispatchers.IO) {
+            asyncAwait {
                 useCase.execute(ListCharactersUseCase.Params())
-            }.await()
-
+            }
         }
-
     }
-
 }

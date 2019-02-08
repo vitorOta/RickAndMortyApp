@@ -8,10 +8,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.vitorota.rickandmorty.R
 import com.vitorota.rickandmorty.data.character.entity.Character
 import com.vitorota.rickandmorty.features.BaseActivity
+import com.vitorota.rickandmorty.utils.launchUI
 import kotlinx.android.synthetic.main.activity_list_characters.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class ListCharactersActivity : BaseActivity() {
 
@@ -42,12 +40,11 @@ class ListCharactersActivity : BaseActivity() {
 
         setupView()
         setupObservers()
-
         retrieveData()
     }
 
     private fun retrieveData() {
-        GlobalScope.launch(Dispatchers.Main) {
+        launchUI {
             viewModel.loadCharacters()
         }
     }
