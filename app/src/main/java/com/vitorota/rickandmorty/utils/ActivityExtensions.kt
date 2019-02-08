@@ -17,10 +17,8 @@ fun Activity.showAlert(message: Int) {
 }
 
 
-
-inline fun Activity.creteLoadingDialog():AlertDialog {
+inline fun Activity.createLoadingDialog(): AlertDialog{
     val loadingView = this.layoutInflater.inflate(R.layout.dialog_loading, null)
-
 
     val dialog = AlertDialog.Builder(this)
         .setView(loadingView)

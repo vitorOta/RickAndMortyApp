@@ -1,31 +1,58 @@
 package com.vitorota.rickandmorty.features.character.list
 
-import android.app.AlertDialog
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.vitorota.rickandmorty.R
 import com.vitorota.rickandmorty.data.character.entity.Character
-import com.vitorota.rickandmorty.utils.creteLoadingDialog
-import com.vitorota.rickandmorty.utils.showAlert
+import com.vitorota.rickandmorty.features.BaseActivity
 import kotlinx.android.synthetic.main.activity_list_characters.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
-class ListCharactersActivity : AppCompatActivity() {
-
+class ListCharactersActivity : BaseActivity() {
 
     private lateinit var adapter: ListCharactersAdapter
-    private lateinit var loadingDialog: AlertDialog
+
+    private val viewModel by lazy {
+        ViewModelProviders.of(this).get(ListCharacterViewModel::class.java)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.list_characters_activity, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item?.itemId) {
+            R.id.refresh -> {
+                retrieveData()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_characters)
 
         setupView()
+        setupObservers()
 
-        loadingDialog = creteLoadingDialog()
-        val viewModel = ViewModelProviders.of(this).get(ListCharacterViewModel::class.java)
+        retrieveData()
+    }
 
+    private fun retrieveData() {
+        GlobalScope.launch(Dispatchers.Main) {
+            viewModel.loadCharacters()
+        }
+    }
+
+    private fun setupObservers() {
         viewModel.observe(this, ::showProgress, ::hideProgress, ::showError, ::handleData)
     }
 
@@ -38,17 +65,4 @@ class ListCharactersActivity : AppCompatActivity() {
     fun handleData(data: List<Character>) {
         adapter.submitList(data)
     }
-
-    fun showProgress() {
-        loadingDialog.show()
-    }
-
-    fun hideProgress() {
-        loadingDialog.hide()
-    }
-
-    fun showError(message: Int) {
-        showAlert(message)
-    }
-
 }

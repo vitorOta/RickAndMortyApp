@@ -15,25 +15,24 @@ import timber.log.Timber
  * @since 24/01/2019
  */
 open class BaseViewModel<T> : ViewModel() {
-    private val injector: ViewModelComponent = DaggerViewModelComponent
+    protected val injector: ViewModelComponent = DaggerViewModelComponent
         .builder()
         .build()
 
 
-    val showProgressEvent = SingleLiveEvent<Void>()
-    val hideProgressEvent = SingleLiveEvent<Void>()
-    val showErrorEvent = SingleLiveEvent<Int>()
+    protected val showProgressEvent = SingleLiveEvent<Void>()
+    protected val hideProgressEvent = SingleLiveEvent<Void>()
+    protected val showErrorEvent = SingleLiveEvent<Int>()
 
     private val _data: MutableLiveData<T> = MutableLiveData()
 
     open val data: LiveData<T> = _data
 
-
-    init {
-        //inject dependencies
-        injector.inject(this)
-    }
-
+    //TODO revert to this
+//    init {
+//        //inject dependencies
+//        injector.inject(this)
+//    }
 
     protected suspend fun doWorkWithProgress(loadData: suspend () -> T) {
         showProgressEvent.call()
@@ -69,6 +68,4 @@ open class BaseViewModel<T> : ViewModel() {
         showErrorEvent.observe(owner, Observer(showError))
         data.observe(owner, Observer(handleData))
     }
-
-
 }

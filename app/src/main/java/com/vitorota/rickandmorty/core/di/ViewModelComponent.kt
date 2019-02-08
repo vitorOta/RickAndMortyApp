@@ -1,8 +1,8 @@
 package com.vitorota.rickandmorty.core.di
 
-import androidx.lifecycle.ViewModel
 import com.vitorota.rickandmorty.core.di.data.NetworkModule
 import com.vitorota.rickandmorty.core.di.features.CharacterModule
+import com.vitorota.rickandmorty.features.character.list.ListCharacterViewModel
 import dagger.Component
 import javax.inject.Singleton
 
@@ -21,5 +21,5 @@ import javax.inject.Singleton
 )
 interface ViewModelComponent {
 
-    fun inject(viewModel: ViewModel)
+    fun inject(viewModel: ListCharacterViewModel)
 }
