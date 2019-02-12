@@ -7,7 +7,7 @@
         >
 
     <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCharacters"
+            android:id="@+id/listCharacters_rvCharacters"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintStart_toStartOf="parent"

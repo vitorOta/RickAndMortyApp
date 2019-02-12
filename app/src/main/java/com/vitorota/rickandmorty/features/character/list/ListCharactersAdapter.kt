@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.vitorota.rickandmorty.R
 import com.vitorota.rickandmorty.data.character.entity.Character
+import com.vitorota.rickandmorty.features.character.list.ListCharactersAdapter.CharacterViewHolder
 import kotlinx.android.synthetic.main.item_character.view.*
 
 /**
@@ -17,18 +18,16 @@ import kotlinx.android.synthetic.main.item_character.view.*
  */
 class ListCharactersAdapter(
     private val onItemClicked: (Character) -> Unit
-) : ListAdapter<Character, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
+) : ListAdapter<Character, CharacterViewHolder>(DIFF_CALLBACK) {
 
-    class CharacterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_character, parent, false)
         val holder = CharacterViewHolder(view)
 
         return holder
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
         val character = getItem(position)
         with(holder.itemView) {
             setOnClickListener { onItemClicked(character) }
@@ -37,14 +36,11 @@ class ListCharactersAdapter(
         }
     }
 
-
+    class CharacterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }
 
 object DIFF_CALLBACK : ItemCallback<Character>() {
-    override fun areItemsTheSame(oldItem: Character, newItem: Character): Boolean =
-        oldItem.id == newItem.id
+    override fun areItemsTheSame(oldItem: Character, newItem: Character): Boolean = oldItem.id == newItem.id
 
-
-    override fun areContentsTheSame(oldItem: Character, newItem: Character): Boolean =
-        oldItem == newItem
+    override fun areContentsTheSame(oldItem: Character, newItem: Character): Boolean = oldItem == newItem
 }

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.vitorota.rickandmorty.R
 import com.vitorota.rickandmorty.data.character.entity.Character
 import com.vitorota.rickandmorty.features.BaseActivity
+import com.vitorota.rickandmorty.features.character.details.CharacterDetailsActivity
 import com.vitorota.rickandmorty.utils.launchUI
 import kotlinx.android.synthetic.main.activity_list_characters.*
 
@@ -54,12 +55,17 @@ class ListCharactersActivity : BaseActivity() {
     }
 
     private fun setupView() {
-        rvCharacters.layoutManager = GridLayoutManager(this, 3)
-        adapter = ListCharactersAdapter { }
-        rvCharacters.adapter = adapter
+        listCharacters_rvCharacters.layoutManager = GridLayoutManager(this, 3)
+        adapter = ListCharactersAdapter(this::showCharacterDetails)
+        listCharacters_rvCharacters.adapter = adapter
     }
 
     fun handleData(data: List<Character>) {
         adapter.submitList(data)
+    }
+
+    fun showCharacterDetails(character: Character) {
+        val intent = CharacterDetailsActivity.createIntent(this, character.id)
+        startActivity(intent)
     }
 }

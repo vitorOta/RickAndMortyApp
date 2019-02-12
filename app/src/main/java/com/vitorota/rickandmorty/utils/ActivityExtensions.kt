@@ -13,11 +13,12 @@ import com.vitorota.rickandmorty.R
 
 fun Activity.showAlert(message: Int) {
     AlertDialog.Builder(this).setMessage(message)
+        .setPositiveButton(android.R.string.ok, null)
         .show()
 }
 
 
-inline fun Activity.createLoadingDialog(): AlertDialog{
+inline fun Activity.createLoadingDialog(): AlertDialog {
     val loadingView = this.layoutInflater.inflate(R.layout.dialog_loading, null)
 
     val dialog = AlertDialog.Builder(this)
