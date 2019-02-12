@@ -2,6 +2,7 @@ package com.vitorota.rickandmorty.core.di
 
 import com.vitorota.rickandmorty.core.di.data.NetworkModule
 import com.vitorota.rickandmorty.core.di.features.CharacterModule
+import com.vitorota.rickandmorty.features.character.details.CharacterDetailsViewModel
 import com.vitorota.rickandmorty.features.character.list.ListCharacterViewModel
 import dagger.Component
 import javax.inject.Singleton
@@ -20,6 +21,6 @@ import javax.inject.Singleton
     )
 )
 interface ViewModelComponent {
-
     fun inject(viewModel: ListCharacterViewModel)
+    fun inject(viewModel: CharacterDetailsViewModel)
 }

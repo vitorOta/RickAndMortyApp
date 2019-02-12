@@ -2,6 +2,7 @@ package com.vitorota.rickandmorty.utils
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.DialogInterface
 import com.vitorota.rickandmorty.R
 
 
@@ -11,9 +12,9 @@ import com.vitorota.rickandmorty.R
  * @since 24/01/2019
  */
 
-fun Activity.showAlert(message: Int) {
+fun Activity.showAlert(message: Int, okListener: DialogInterface.OnClickListener? = null) {
     AlertDialog.Builder(this).setMessage(message)
-        .setPositiveButton(android.R.string.ok, null)
+        .setPositiveButton(android.R.string.ok, okListener)
         .show()
 }
 

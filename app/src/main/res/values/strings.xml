@@ -4,4 +4,11 @@
     <string name="error_404">Não encontrado</string>
     <string name="error_http_general">Ocorreu um erro, favor tentar novamente mais tarde</string>
     <string name="refresh">Atualizar</string>
+    <string name="character_not_found">Personagem não encontrado</string>
+    <string name="status">Status</string>
+    <string name="species">Espécies</string>
+    <string name="gender">Gênero</string>
+    <string name="origin">Origem</string>
+    <string name="unknown">Desconhecida</string>
+    <string name="last_location">Última Localização</string>
 </resources>

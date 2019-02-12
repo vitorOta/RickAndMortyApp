@@ -13,17 +13,20 @@
             android:layout_height="300dp">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/characterDetails_collapsingToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:contentScrim="?attr/colorPrimary"
-                app:expandedTitleMarginStart="48dp"
-                app:expandedTitleMarginEnd="64dp"
+                app:expandedTitleMarginStart="30dp"
+                app:expandedTitleMarginEnd="56dp"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 >
 
             <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/characterDetails_sdvImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:scaleType="centerInside"
                     app:placeholderImageScaleType="centerCrop"
                     app:placeholderImage="@drawable/placeholder_black"
                     app:layout_collapseMode="parallax"
@@ -56,7 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"
-                android:paddingTop="@dimen/activity_horizontal_margin"
-                />
+                android:paddingTop="40dp"/>
+        <!--TODO change this padding top-->
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -2,7 +2,7 @@ ext {
     //Android
     androidCompileSdkVersion = 28
     androidApplicationId = "com.vitorota.rickandmorty"
-    androidMinSdkVersion = 15
+    androidMinSdkVersion = 17
     androidTargetSdkVersion = 28
     androidVersionCode = 1
     androidVersionName = "1.0"
