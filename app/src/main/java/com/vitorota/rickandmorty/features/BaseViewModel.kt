@@ -2,8 +2,6 @@ package com.vitorota.rickandmorty.features
 
 import androidx.lifecycle.*
 import com.vitorota.rickandmorty.R
-import com.vitorota.rickandmorty.core.di.DaggerViewModelComponent
-import com.vitorota.rickandmorty.core.di.ViewModelComponent
 import com.vitorota.rickandmorty.data.util.exceptions.DataHttpException
 import com.vitorota.rickandmorty.data.util.exceptions.DataIOException
 import com.vitorota.rickandmorty.utils.SingleLiveEvent
@@ -15,11 +13,6 @@ import timber.log.Timber
  * @since 24/01/2019
  */
 open class BaseViewModel<T> : ViewModel() {
-    protected val injector: ViewModelComponent = DaggerViewModelComponent
-        .builder()
-        .build()
-
-
     protected val showProgressEvent = SingleLiveEvent<Void>()
     protected val hideProgressEvent = SingleLiveEvent<Void>()
     protected val showErrorEvent = SingleLiveEvent<Int>()

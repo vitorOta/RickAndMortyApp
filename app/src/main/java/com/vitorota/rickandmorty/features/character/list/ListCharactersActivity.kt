@@ -3,7 +3,6 @@ package com.vitorota.rickandmorty.features.character.list
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.vitorota.rickandmorty.R
 import com.vitorota.rickandmorty.data.character.entity.Character
@@ -11,14 +10,13 @@ import com.vitorota.rickandmorty.features.BaseActivity
 import com.vitorota.rickandmorty.features.character.details.CharacterDetailsActivity
 import com.vitorota.rickandmorty.utils.launchUI
 import kotlinx.android.synthetic.main.activity_list_characters.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListCharactersActivity : BaseActivity() {
 
     private lateinit var adapter: ListCharactersAdapter
 
-    private val viewModel by lazy {
-        ViewModelProviders.of(this).get(ListCharacterViewModel::class.java)
-    }
+    private val mViewModel: ListCharacterViewModel by viewModel()
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.list_characters_activity, menu)
@@ -46,12 +44,12 @@ class ListCharactersActivity : BaseActivity() {
 
     private fun retrieveData() {
         launchUI {
-            viewModel.loadCharacters()
+            mViewModel.loadCharacters()
         }
     }
 
     private fun setupObservers() {
-        viewModel.observe(this, ::showProgress, ::hideProgress, ::showError, ::handleData)
+        mViewModel.observe(this, ::showProgress, ::hideProgress, ::showError, ::handleData)
     }
 
     private fun setupView() {

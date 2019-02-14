@@ -3,21 +3,19 @@ package com.vitorota.rickandmorty.features.character.details
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vitorota.rickandmorty.R
 import com.vitorota.rickandmorty.data.character.entity.Character
 import com.vitorota.rickandmorty.features.BaseActivity
 import com.vitorota.rickandmorty.utils.launchUI
 import kotlinx.android.synthetic.main.activity_character_details.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CharacterDetailsActivity : BaseActivity() {
 
     private lateinit var adapter: CharacterDataAdapter
 
-    private val viewModel: CharacterDetailsViewModel by lazy {
-        ViewModelProviders.of(this).get(CharacterDetailsViewModel::class.java)
-    }
+    private val mViewModel: CharacterDetailsViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +28,7 @@ class CharacterDetailsActivity : BaseActivity() {
         setupObservers()
 
         launchUI {
-            viewModel.loadData(characterId)
+            mViewModel.loadData(characterId)
         }
 
     }
@@ -45,7 +43,7 @@ class CharacterDetailsActivity : BaseActivity() {
     }
 
     private fun setupObservers() {
-        viewModel.observe(this, this::showProgress, this::hideProgress, this::showError, this::handleData)
+        mViewModel.observe(this, this::showProgress, this::hideProgress, this::showError, this::handleData)
     }
 
     private fun handleData(data: Character?) {
