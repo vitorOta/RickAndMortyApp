@@ -11,4 +11,5 @@
     <string name="origin">Origem</string>
     <string name="unknown">Desconhecida</string>
     <string name="last_location">Última Localização</string>
+    <string name="name">Nome</string>
 </resources>

@@ -51,11 +51,12 @@ class CharacterDetailsActivity : BaseActivity() {
             this.showError(R.string.character_not_found)
             onSupportNavigateUp()
         } else {
-            characterDetails_collapsingToolbar.title = "${data.name} (#${data.id})"
+            characterDetails_collapsingToolbar.title = "${data.name}"
             characterDetails_sdvImage.setImageURI(data.image)
 
             val list = mutableListOf<Pair<String, String>>()
             with(data) {
+                list.add(Pair(getString(R.string.name), name))
                 list.add(Pair(getString(R.string.status), status))
                 list.add(Pair(getString(R.string.species), species))
                 list.add(Pair(getString(R.string.gender), gender))
@@ -81,6 +82,4 @@ class CharacterDetailsActivity : BaseActivity() {
                 putExtra(KEY_CHARACTER_ID, characterId)
             }
     }
-
 }
-
