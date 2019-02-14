@@ -18,7 +18,7 @@ ext {
     gsonVersion = '2.8.5'
     roomVersion = '2.1.0-alpha03'
     lifecycleVersion = '2.0.0'
-    daggerVersion = '2.21'
+    koinVersion = '1.0.2'
     kotlinCoroutinesVersion = '1.1.0'
     kotlinCoroutinesRetrofitAdapterVersion = '0.9.2'
     timberVersion = '4.7.1'
@@ -57,7 +57,8 @@ ext {
             //parsing
             gson                           : "com.google.code.gson:gson:$gsonVersion",
             //di
-            dagger                         : "com.google.dagger:dagger:$daggerVersion",
+            koin                           : "org.koin:koin-android:$koinVersion",
+            koinViewModel                  : "org.koin:koin-androidx-viewmodel:$koinVersion",
             //logging
             timber                         : "com.jakewharton.timber:timber:$timberVersion",
             //imageLoader
@@ -68,7 +69,6 @@ ext {
     allKaptDependencies = [
             roomCompiler     : "androidx.room:room-compiler:$roomVersion",
             lifecycleCompiler: "android.arch.lifecycle:compiler:$lifecycleVersion",
-            daggerCompiler   : "com.google.dagger:dagger-compiler:$daggerVersion",
     ]
 
     allTestDependencies = [
@@ -95,14 +95,14 @@ ext {
             allDependencies.constraintLayout,
             allDependencies.recyclerView,
             allDependencies.cardView,
-            allDependencies.dagger,
+            allDependencies.koin,
+            allDependencies.koinViewModel,
             allDependencies.timber,
             allDependencies.fresco,
             allDependencies.gson,
             allDependencies.lifecycle
     ]
     appKapt = [
-            allKaptDependencies.daggerCompiler,
             allKaptDependencies.lifecycleCompiler,
     ]
     appTestDependencies = [
@@ -122,12 +122,10 @@ ext {
             allDependencies.appCompat,
             allDependencies.retrofit,
             allDependencies.retrofitGsonConverter,
-            allDependencies.dagger,
             allDependencies.timber,
             allDependencies.kotlinCoroutines,
     ]
     dataKapt = [
-            allKaptDependencies.daggerCompiler,
     ]
     dataTestDependencies = [
             allTestDependencies.jUnit,

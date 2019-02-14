@@ -10,8 +10,9 @@ Android project to study
 - MVVM
 
 #### Lib's
-- Dagger
+- Koin ~~Dagger~~
 - Retrofit
+- Kotlin Coroutines
 - Gson
 - Android Components (Room, ViewModel, LiveData)
 - Timber

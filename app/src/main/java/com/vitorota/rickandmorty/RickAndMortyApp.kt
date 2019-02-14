@@ -2,11 +2,11 @@ package com.vitorota.rickandmorty
 
 import android.app.Application
 import com.facebook.drawee.backends.pipeline.Fresco
+import com.vitorota.rickandmorty.di.CharacterModule
+import com.vitorota.rickandmorty.di.NetworkModule
+import org.koin.android.ext.android.startKoin
 import timber.log.Timber
 import timber.log.Timber.plant
-import android.graphics.Bitmap
-import com.facebook.imagepipeline.core.ImagePipelineConfig
-
 
 
 /**
@@ -20,6 +20,16 @@ class RickAndMortyApp : Application() {
         super.onCreate()
         setupFresco()
         setupTimber()
+        setupKoin()
+    }
+
+    private fun setupKoin() {
+        startKoin(
+            this, listOf(
+                NetworkModule,
+                CharacterModule
+            )
+        )
     }
 
     private fun setupFresco() {
@@ -34,7 +44,7 @@ class RickAndMortyApp : Application() {
     private fun setupTimber() {
         if (BuildConfig.DEBUG) {
             plant(Timber.DebugTree())
-        }else{
+        } else {
             //TODO Crash reporting three logging for production app
         }
     }
