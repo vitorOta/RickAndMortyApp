@@ -9,9 +9,9 @@ import com.vitorota.rickandmorty.utils.showAlert
  * @author Vitor Ota
  * @since 08/02/2019
  */
-open class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity() {
 
-    private val loadingDialog by lazy { createLoadingDialog() }
+    protected open val loadingDialog by lazy { createLoadingDialog() }
 
     open fun showProgress() {
         loadingDialog.show()
