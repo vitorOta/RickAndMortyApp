@@ -1,4 +1,4 @@
-package com.vitorota.rickandmorty.data.location.entities
+package com.vitorota.rickandmorty.data.location.schemas
 
 import com.vitorota.rickandmorty.data.Schema
 import com.vitorota.rickandmorty.data.location.entity.Location

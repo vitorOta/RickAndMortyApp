@@ -124,6 +124,7 @@ ext {
             allDependencies.retrofitGsonConverter,
             allDependencies.timber,
             allDependencies.kotlinCoroutines,
+            allDependencies.room,
     ]
     dataKapt = [
     ]

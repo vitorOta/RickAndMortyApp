@@ -1,4 +1,4 @@
-package com.vitorota.rickandmorty.data.episode.entities
+package com.vitorota.rickandmorty.data.episode.schemas
 
 import com.google.gson.annotations.SerializedName
 import com.vitorota.rickandmorty.data.Schema

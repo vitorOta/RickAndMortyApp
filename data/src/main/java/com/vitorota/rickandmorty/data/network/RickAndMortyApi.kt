@@ -1,9 +1,9 @@
 package com.vitorota.rickandmorty.data.network
 
 import com.vitorota.rickandmorty.data.ListResponse
-import com.vitorota.rickandmorty.data.character.entities.CharacterSchema
-import com.vitorota.rickandmorty.data.episode.entities.EpisodeSchema
-import com.vitorota.rickandmorty.data.location.entities.LocationSchema
+import com.vitorota.rickandmorty.data.character.schemas.CharacterSchema
+import com.vitorota.rickandmorty.data.episode.schemas.EpisodeSchema
+import com.vitorota.rickandmorty.data.location.schemas.LocationSchema
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Path

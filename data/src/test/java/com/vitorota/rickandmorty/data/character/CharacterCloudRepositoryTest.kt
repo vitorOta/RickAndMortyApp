@@ -1,8 +1,8 @@
 package com.vitorota.rickandmorty.data.character.repository
 
 import com.vitorota.rickandmorty.data.ListResponse
-import com.vitorota.rickandmorty.data.character.entities.CharacterSchema
 import com.vitorota.rickandmorty.data.character.entity.Character
+import com.vitorota.rickandmorty.data.character.schemas.CharacterSchema
 import com.vitorota.rickandmorty.data.network.ApiClientBuilder
 import com.vitorota.rickandmorty.data.network.RickAndMortyApi
 import com.vitorota.rickandmorty.data.util.enqueueResponse

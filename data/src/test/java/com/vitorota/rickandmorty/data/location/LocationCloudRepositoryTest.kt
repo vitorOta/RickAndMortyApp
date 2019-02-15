@@ -1,9 +1,9 @@
 package com.vitorota.rickandmorty.data.character.repository
 
 import com.vitorota.rickandmorty.data.ListResponse
-import com.vitorota.rickandmorty.data.location.entities.LocationSchema
 import com.vitorota.rickandmorty.data.location.entity.Location
 import com.vitorota.rickandmorty.data.location.repository.LocationCloudRepository
+import com.vitorota.rickandmorty.data.location.schemas.LocationSchema
 import com.vitorota.rickandmorty.data.network.ApiClientBuilder
 import com.vitorota.rickandmorty.data.network.RickAndMortyApi
 import com.vitorota.rickandmorty.data.util.enqueueResponse

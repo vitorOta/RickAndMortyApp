@@ -8,4 +8,7 @@ package com.vitorota.rickandmorty.data
 interface Repository<T> {
     suspend fun list(page: Int = 1): List<T>
     suspend fun get(id: Int): T?
+    suspend fun insert(t: T)
+    suspend fun update(t: T)
+    suspend fun delete(t: T)
 }

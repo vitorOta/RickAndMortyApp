@@ -1,11 +1,11 @@
-package com.vitorota.rickandmorty.data.character.entities
+package com.vitorota.rickandmorty.data.character.schemas
 
 import com.vitorota.rickandmorty.data.Schema
 import com.vitorota.rickandmorty.data.character.entity.Character
-import com.vitorota.rickandmorty.data.episode.entities.EpisodeSchema
 import com.vitorota.rickandmorty.data.episode.entity.Episode
-import com.vitorota.rickandmorty.data.location.entities.LocationSchema
+import com.vitorota.rickandmorty.data.episode.schemas.EpisodeSchema
 import com.vitorota.rickandmorty.data.location.entity.Location
+import com.vitorota.rickandmorty.data.location.schemas.LocationSchema
 
 /**
  *
