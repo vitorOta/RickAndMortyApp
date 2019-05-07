@@ -20,7 +20,7 @@ class SynchronousRequestManagerImpl<T> : SynchronousRequestManager<T> {
             val result = deferred.await()
             return result
         } catch (e: Exception) {
-            Timber.d(e.message)
+            Timber.e(e)
             when (e) {
                 is IOException -> throw DataIOException(e.message, e)
                 is HttpException -> throw DataHttpException(e.message, e.code(), e)
