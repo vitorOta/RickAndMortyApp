@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/nav_graph"
+            app:startDestination="@id/listCharactersFragment">
+    <fragment
+            android:id="@+id/listCharactersFragment"
+            android:name="com.vitorota.rickandmorty.features.character.list.ListCharactersFragment"
+            android:label="@string/title_listCharactersFragment"
+            tools:layout="@layout/fragment_list_characters">
+        <action
+                android:id="@+id/action_listCharactersFragment_to_characterDetailsFragment"
+                app:destination="@+id/characterDetailsFragment"/>
+    </fragment>
+    <fragment
+            android:id="@+id/characterDetailsFragment"
+            android:name="com.vitorota.rickandmorty.features.character.details.CharacterDetailsFragment"
+            android:label="@string/title_characterDetailsFragment"
+            tools:layout="@layout/fragment_character_details">
+        <argument
+                android:name="CHARACTER_ID"
+                app:argType="integer"/>
+    </fragment>
+</navigation>

@@ -1,45 +1,51 @@
 package com.vitorota.rickandmorty.features.character.details
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vitorota.rickandmorty.R
 import com.vitorota.rickandmorty.data.character.entity.Character
-import com.vitorota.rickandmorty.features.BaseActivity
+import com.vitorota.rickandmorty.features.BaseFragment
 import com.vitorota.rickandmorty.utils.launchUI
-import kotlinx.android.synthetic.main.activity_character_details.*
+import kotlinx.android.synthetic.main.fragment_character_details.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CharacterDetailsActivity : BaseActivity() {
+class CharacterDetailsFragment : BaseFragment() {
+
+    val args: CharacterDetailsFragmentArgs by navArgs()
 
     private lateinit var adapter: CharacterDataAdapter
 
     private val mViewModel: CharacterDetailsViewModel by viewModel()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_character_details)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(R.layout.fragment_character_details, container, false)
+        return view
+    }
 
-        val characterId = intent.extras.getInt(KEY_CHARACTER_ID)
-        //TODO threat when extra is not available
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupView()
+
+        val characterId = args.CHARACTERID
+
         setupObservers()
 
         launchUI {
             mViewModel.loadData(characterId)
         }
-
     }
 
     private fun setupView() {
-        setSupportActionBar(characterDetails_toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+//        (activity as AppCompatActivity)?.setSupportActionBar(characterDetails_toolbar)
+//        (activity as AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         adapter = CharacterDataAdapter()
         characterDetails_rvData.adapter = adapter
-        characterDetails_rvData.layoutManager = LinearLayoutManager(this)
+        characterDetails_rvData.layoutManager = LinearLayoutManager(context)
     }
 
     private fun setupObservers() {
@@ -49,7 +55,7 @@ class CharacterDetailsActivity : BaseActivity() {
     private fun handleData(data: Character?) {
         if (data == null) {
             this.showError(R.string.character_not_found)
-            onSupportNavigateUp()
+
         } else {
             characterDetails_collapsingToolbar.title = "${data.name}"
             characterDetails_sdvImage.setImageURI(data.image)
@@ -65,21 +71,5 @@ class CharacterDetailsActivity : BaseActivity() {
             }
             adapter.submitList(list)
         }
-    }
-
-
-    override fun onSupportNavigateUp(): Boolean {
-        finish()
-        return true
-    }
-
-    companion object {
-
-        private const val KEY_CHARACTER_ID = "characterIdKey"
-
-        fun createIntent(context: Context, characterId: Int): Intent =
-            Intent(context, CharacterDetailsActivity::class.java).apply {
-                putExtra(KEY_CHARACTER_ID, characterId)
-            }
     }
 }

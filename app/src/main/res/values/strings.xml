@@ -12,4 +12,6 @@
     <string name="unknown">Desconhecida</string>
     <string name="last_location">Última Localização</string>
     <string name="name">Nome</string>
+    <string name="title_listCharactersFragment">Characters</string>
+    <string name="title_characterDetailsFragment">Detalhes</string>
 </resources>

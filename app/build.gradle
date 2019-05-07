@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 android {
 
@@ -25,7 +26,6 @@ android {
     }
 }
 
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':data')
@@ -33,6 +33,5 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
 }
-
 
 apply from: rootProject.file("buildsystem/dependenciesScript.gradle")

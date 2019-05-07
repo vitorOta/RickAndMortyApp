@@ -1,29 +1,30 @@
 package com.vitorota.rickandmorty.features.character.list
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
+import android.telecom.Call
+import android.view.*
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.vitorota.rickandmorty.R
 import com.vitorota.rickandmorty.data.character.entity.Character
-import com.vitorota.rickandmorty.features.BaseActivity
-import com.vitorota.rickandmorty.features.character.details.CharacterDetailsActivity
+import com.vitorota.rickandmorty.features.BaseFragment
+import com.vitorota.rickandmorty.features.character.details.CharacterDetailsFragment
+import com.vitorota.rickandmorty.features.character.details.CharacterDetailsFragmentArgs
 import com.vitorota.rickandmorty.utils.launchUI
-import kotlinx.android.synthetic.main.activity_list_characters.*
+import kotlinx.android.synthetic.main.fragment_list_characters.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ListCharactersActivity : BaseActivity() {
+class ListCharactersFragment : BaseFragment() {
 
     private lateinit var adapter: ListCharactersAdapter
 
     private val mViewModel: ListCharacterViewModel by viewModel()
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.list_characters_activity, menu)
-        return true
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.list_characters_fragment, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item?.itemId) {
             R.id.refresh -> {
                 retrieveData()
@@ -33,10 +34,12 @@ class ListCharactersActivity : BaseActivity() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_list_characters)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(R.layout.fragment_list_characters, container, false)
+        return view
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupView()
         setupObservers()
         retrieveData()
@@ -53,7 +56,7 @@ class ListCharactersActivity : BaseActivity() {
     }
 
     private fun setupView() {
-        listCharacters_rvCharacters.layoutManager = GridLayoutManager(this, 3)
+        listCharacters_rvCharacters.layoutManager = GridLayoutManager(context, 3)
         adapter = ListCharactersAdapter(this::showCharacterDetails)
         listCharacters_rvCharacters.adapter = adapter
     }
@@ -63,7 +66,7 @@ class ListCharactersActivity : BaseActivity() {
     }
 
     fun showCharacterDetails(character: Character) {
-        val intent = CharacterDetailsActivity.createIntent(this, character.id)
-        startActivity(intent)
+        val direction= ListCharactersFragmentDirections.actionListCharactersFragmentToCharacterDetailsFragment(character.id)
+        NavHostFragment.findNavController(this).navigate(direction)
     }
 }

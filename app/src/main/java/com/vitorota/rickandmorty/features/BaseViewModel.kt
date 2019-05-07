@@ -21,12 +21,6 @@ open class BaseViewModel<T> : ViewModel() {
 
     open val data: LiveData<T> = _data
 
-    //TODO revert to this
-//    init {
-//        //inject dependencies
-//        injector.inject(this)
-//    }
-
     protected suspend fun doWorkWithProgress(loadData: suspend () -> T) {
         showProgressEvent.call()
 
