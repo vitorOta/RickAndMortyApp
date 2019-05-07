@@ -1,15 +1,12 @@
 package com.vitorota.rickandmorty.features.character.list
 
 import android.os.Bundle
-import android.telecom.Call
 import android.view.*
-import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.vitorota.rickandmorty.R
 import com.vitorota.rickandmorty.data.character.entity.Character
 import com.vitorota.rickandmorty.features.BaseFragment
-import com.vitorota.rickandmorty.features.character.details.CharacterDetailsFragment
-import com.vitorota.rickandmorty.features.character.details.CharacterDetailsFragmentArgs
 import com.vitorota.rickandmorty.utils.launchUI
 import kotlinx.android.synthetic.main.fragment_list_characters.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -35,8 +32,8 @@ class ListCharactersFragment : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_list_characters, container, false)
-        return view
+        setHasOptionsMenu(true)
+        return inflater.inflate(R.layout.fragment_list_characters, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -61,12 +58,13 @@ class ListCharactersFragment : BaseFragment() {
         listCharacters_rvCharacters.adapter = adapter
     }
 
-    fun handleData(data: List<Character>) {
+    private fun handleData(data: List<Character>) {
         adapter.submitList(data)
     }
 
-    fun showCharacterDetails(character: Character) {
-        val direction= ListCharactersFragmentDirections.actionListCharactersFragmentToCharacterDetailsFragment(character.id)
-        NavHostFragment.findNavController(this).navigate(direction)
+    private fun showCharacterDetails(character: Character) {
+        val direction =
+            ListCharactersFragmentDirections.actionListCharactersFragmentToCharacterDetailsFragment(character.id)
+        findNavController().navigate(direction)
     }
 }
