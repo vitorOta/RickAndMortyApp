@@ -4,7 +4,8 @@ import android.app.Application
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.vitorota.rickandmorty.di.CharacterModule
 import com.vitorota.rickandmorty.di.NetworkModule
-import org.koin.android.ext.android.startKoin
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 import timber.log.Timber
 import timber.log.Timber.plant
 
@@ -24,12 +25,13 @@ class RickAndMortyApp : Application() {
     }
 
     private fun setupKoin() {
-        startKoin(
-            this, listOf(
+        startKoin {
+            androidContext(this@RickAndMortyApp)
+            modules(
                 NetworkModule,
                 CharacterModule
             )
-        )
+        }
     }
 
     private fun setupFresco() {

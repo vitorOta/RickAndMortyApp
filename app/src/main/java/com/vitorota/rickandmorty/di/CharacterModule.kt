@@ -6,8 +6,8 @@ import com.vitorota.rickandmorty.data.character.usecase.GetCharacterUseCase
 import com.vitorota.rickandmorty.data.character.usecase.ListCharactersUseCase
 import com.vitorota.rickandmorty.features.character.details.CharacterDetailsViewModel
 import com.vitorota.rickandmorty.features.character.list.ListCharacterViewModel
-import org.koin.androidx.viewmodel.ext.koin.viewModel
-import org.koin.dsl.module.module
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.dsl.module
 
 /**
  *
