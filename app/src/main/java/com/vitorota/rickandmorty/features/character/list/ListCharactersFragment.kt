@@ -1,9 +1,7 @@
 package com.vitorota.rickandmorty.features.character.list
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.vitorota.rickandmorty.R
@@ -20,6 +18,7 @@ class ListCharactersFragment : BaseFragment() {
     private val mViewModel: ListCharacterViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_list_characters, container, false)
     }
 
@@ -29,6 +28,21 @@ class ListCharactersFragment : BaseFragment() {
         if (!mViewModel.triedLoadAtLeastOnce) {
             retrieveData()
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.list_characters_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_refresh -> {
+                retrieveData()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+
     }
 
     private fun retrieveData() {
