@@ -18,14 +18,14 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CharacterDetailsFragment : BaseFragment() {
 
-    private lateinit var adapter: CharacterDataAdapter
+    private val args: CharacterDetailsFragmentArgs by navArgs()
 
     private val mViewModel: CharacterDetailsViewModel by viewModel()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_character_details, container, false)
-        return view
-    }
+    private lateinit var adapter: CharacterDataAdapter
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+        inflater.inflate(R.layout.fragment_character_details, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupView()
@@ -33,7 +33,6 @@ class CharacterDetailsFragment : BaseFragment() {
         setupObservers()
 
         if (!mViewModel.triedLoadAtLeastOnce) {
-            val args: CharacterDetailsFragmentArgs by navArgs()
             val characterId = args.CHARACTERID
             launchUI {
                 mViewModel.loadData(characterId)
@@ -53,6 +52,10 @@ class CharacterDetailsFragment : BaseFragment() {
         adapter = CharacterDataAdapter()
         characterDetails_rvData.adapter = adapter
         characterDetails_rvData.layoutManager = LinearLayoutManager(context)
+        characterDetails_sdvImage.setImageURI(args.PICTUREURI)
+        args.CHARACTERNAME?.let {
+            characterDetails_collapsingToolbar.title = it
+        }
     }
 
     private fun setupObservers() {

@@ -21,20 +21,19 @@ class ApiClientBuilder {
         private val defaultClient: OkHttpClient = OkHttpClient()
 
         /**
-         * @param cacheSize should be informed in Bytes. if null, no cache will be saved
+         * @param cacheConfig if null, no cache will be saved
          * */
         fun <S> createServiceApi(
             serviceClass: Class<S>,
-            context: Context,
             baseUrl: String,
-            cacheSize: Long? = null,
+            cacheConfig: CacheConfig? = null,
             gson: Gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").create(),
             vararg interceptors: Interceptor
         ): S {
             val clientBuilder = defaultClient.newBuilder()
-            if (cacheSize != null) {
-                clientBuilder.cache(Cache(context.cacheDir, cacheSize))
-                clientBuilder.addInterceptor(CacheInterceptor(context))
+            if (cacheConfig != null) {
+                clientBuilder.cache(Cache(cacheConfig.context.cacheDir, cacheConfig.cacheSize))
+                clientBuilder.addInterceptor(CacheInterceptor(cacheConfig.context))
             }
 
             interceptors.forEach { clientBuilder.addInterceptor(it) }
@@ -50,7 +49,10 @@ class ApiClientBuilder {
 
             return retrofit.create(serviceClass)
         }
-
     }
 
+    /**
+     * @param cacheSize should be informed in Bytes.
+     * */
+    data class CacheConfig(val context: Context, val cacheSize: Long)
 }

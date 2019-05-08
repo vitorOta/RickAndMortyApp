@@ -55,7 +55,11 @@ class ListCharactersFragment : BaseFragment() {
 
     private fun showCharacterDetails(character: Character) {
         val direction =
-            ListCharactersFragmentDirections.actionListCharactersFragmentToCharacterDetailsFragment(character.id)
+            ListCharactersFragmentDirections.actionListCharactersFragmentToCharacterDetailsFragment(
+                character.id,
+                character.name,
+                character.image
+            )
         findNavController().navigate(direction)
     }
 

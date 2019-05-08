@@ -21,5 +21,13 @@
         <argument
                 android:name="CHARACTER_ID"
                 app:argType="integer"/>
+        <argument
+                android:name="CHARACTER_NAME"
+                app:argType="string"
+                app:nullable="true"/>
+        <argument
+                android:name="PICTURE_URI"
+                app:argType="string"
+                app:nullable="true"/>
     </fragment>
 </navigation>

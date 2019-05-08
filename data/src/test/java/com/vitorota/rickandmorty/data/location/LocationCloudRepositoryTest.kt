@@ -67,31 +67,25 @@ class LocationCloudRepositoryTest {
     }
 
     @Test
-    fun `get inexistent item by id (99999) should throw DataHttpException null`() = runBlocking {
+    fun `get inexistent item by id (99999) should throw DataHttpException null and exception should have 404 statusCode`() =
+        runBlocking {
 
-        //region arrange
-        val id = 99999
-        val response =
+            //region arrange
+            val id = 99999
+            server.enqueueResponse(404, "{\"error\":\"Episode not found\"}")
+            //endregion
+
             try {
-                loadJsonFromResources("${filePrefix}_get_$id.json")
-            } catch (e: IllegalStateException) {
-                "{\"error\":\"Episode not found\"}"
+                //region act
+                val item: Location? = repo.get(id)
+                fail()
+                //endregion
+            } catch (e: DataHttpException) {
+                //region assert
+                assertEquals(404, e.statusCode)
+                //endregion
             }
-        server.enqueueResponse(404, response)
-        //endregion
-
-
-        try {
-            //region act
-            val item: Location? = repo.get(id)
-            fail()
-            //endregion
-        } catch (e: DataHttpException) {
-            //region assert
-            assertEquals(404, e.statusCode)
-            //endregion
         }
-    }
 
     @Test
     fun `list response from page (1) successfully`() = runBlocking {
@@ -114,16 +108,10 @@ class LocationCloudRepositoryTest {
     }
 
     @Test
-    fun `list from inexistent page (99999) should throw exception`() = runBlocking {
+    fun `list from inexistent page (99999) should throw DataHttpException`() = runBlocking {
         //region arrange
         val page = 99999
-        val response =
-            try {
-                loadJsonFromResources("${filePrefix}_list_$page.json")
-            } catch (e: IllegalStateException) {
-                "{\"error\":\"There is nothing here\"}"
-            }
-        server.enqueueResponse(404, response)
+        server.enqueueResponse(404, "{\"error\":\"There is nothing here\"}")
         //endregion
 
         try {

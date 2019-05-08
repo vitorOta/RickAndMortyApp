@@ -14,7 +14,6 @@ import okhttp3.Response
  */
 class CacheInterceptor(private val context: Context) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
-
         var cacheValue =
             if (context.hasNetwork) {
                 // If there is Internet, get the cache that was stored 1 day ago.

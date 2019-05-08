@@ -1,8 +1,6 @@
 package com.vitorota.rickandmorty.data.util
 
 import java.io.File
-import java.lang.IllegalStateException
-import java.lang.NullPointerException
 
 
 /**
