@@ -1,9 +1,15 @@
 <resources>
     <string name="app_name">RickAndMorty</string>
-    <string name="error_io">An error has ocurred, check your network connection</string>
+
+    <!-- BaseViewModel strings -->
+    <string name="error_io">An error has occurred, check your network connection</string>
     <string name="error_404">Not found</string>
-    <string name="error_http_general">An error has ocurred, try again later</string>
+    <string name="error_http_general">An error has occurred, try again later</string>
+
+    <!-- ListCharactersFragment strings -->
     <string name="refresh">Refresh</string>
+
+    <!-- CharacterDetailsFragment strings -->
     <string name="character_not_found">Character not found</string>
     <string name="status">Status</string>
     <string name="species">Species</string>
@@ -14,4 +20,5 @@
     <string name="name">Name</string>
     <string name="title_listCharactersFragment">Characters</string>
     <string name="title_characterDetailsFragment">Details</string>
+
 </resources>
