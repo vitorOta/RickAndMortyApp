@@ -1,6 +1,7 @@
 package com.vitorota.rickandmorty.features
 
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import com.vitorota.rickandmorty.utils.createLoadingDialog
 import com.vitorota.rickandmorty.utils.showAlert
 
@@ -9,7 +10,7 @@ import com.vitorota.rickandmorty.utils.showAlert
  * @author Vitor Ota
  * @since 08/02/2019
  */
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseFragment : Fragment() {
 
     protected open val loadingDialog by lazy { createLoadingDialog() }
 

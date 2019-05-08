@@ -13,23 +13,20 @@ import timber.log.Timber
  * @since 24/01/2019
  */
 open class BaseViewModel<T> : ViewModel() {
-    protected val showProgressEvent = SingleLiveEvent<Void>()
-    protected val hideProgressEvent = SingleLiveEvent<Void>()
-    protected val showErrorEvent = SingleLiveEvent<Int>()
+    private val showProgressEvent = SingleLiveEvent<Void>()
+    private val hideProgressEvent = SingleLiveEvent<Void>()
+    private val showErrorEvent = SingleLiveEvent<Int>()
 
     private val _data: MutableLiveData<T> = MutableLiveData()
 
     open val data: LiveData<T> = _data
 
-    //TODO revert to this
-//    init {
-//        //inject dependencies
-//        injector.inject(this)
-//    }
+    var triedLoadAtLeastOnce: Boolean = false
+        private set
 
     protected suspend fun doWorkWithProgress(loadData: suspend () -> T) {
         showProgressEvent.call()
-
+        triedLoadAtLeastOnce = true
         try {
             _data.value = loadData()
         } catch (e: Exception) {

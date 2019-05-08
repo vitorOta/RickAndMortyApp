@@ -1,15 +1,17 @@
 <resources>
     <string name="app_name">RickAndMorty</string>
-    <string name="error_io">Ocorreu um erro, verifique sua conexão com a internet</string>
-    <string name="error_404">Não encontrado</string>
-    <string name="error_http_general">Ocorreu um erro, favor tentar novamente mais tarde</string>
-    <string name="refresh">Atualizar</string>
-    <string name="character_not_found">Personagem não encontrado</string>
+    <string name="error_io">An error has ocurred, check your network connection</string>
+    <string name="error_404">Not found</string>
+    <string name="error_http_general">An error has ocurred, try again later</string>
+    <string name="refresh">Refresh</string>
+    <string name="character_not_found">Character not found</string>
     <string name="status">Status</string>
-    <string name="species">Espécies</string>
-    <string name="gender">Gênero</string>
-    <string name="origin">Origem</string>
-    <string name="unknown">Desconhecida</string>
-    <string name="last_location">Última Localização</string>
-    <string name="name">Nome</string>
+    <string name="species">Species</string>
+    <string name="gender">Gender</string>
+    <string name="origin">Origin</string>
+    <string name="unknown">Unknown</string>
+    <string name="last_location">Last location</string>
+    <string name="name">Name</string>
+    <string name="title_listCharactersFragment">Characters</string>
+    <string name="title_characterDetailsFragment">Details</string>
 </resources>

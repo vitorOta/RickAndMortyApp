@@ -1,8 +1,8 @@
 package com.vitorota.rickandmorty.utils
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
+import androidx.fragment.app.Fragment
 import com.vitorota.rickandmorty.R
 
 
@@ -12,17 +12,17 @@ import com.vitorota.rickandmorty.R
  * @since 24/01/2019
  */
 
-fun Activity.showAlert(message: Int, okListener: DialogInterface.OnClickListener? = null) {
-    AlertDialog.Builder(this).setMessage(message)
+fun Fragment.showAlert(message: Int, okListener: DialogInterface.OnClickListener? = null) {
+    AlertDialog.Builder(context).setMessage(message)
         .setPositiveButton(android.R.string.ok, okListener)
         .show()
 }
 
 
-inline fun Activity.createLoadingDialog(): AlertDialog {
+inline fun Fragment.createLoadingDialog(): AlertDialog {
     val loadingView = this.layoutInflater.inflate(R.layout.dialog_loading, null)
 
-    val dialog = AlertDialog.Builder(this)
+    val dialog = AlertDialog.Builder(context)
         .setView(loadingView)
         .setCancelable(false)
         .create()

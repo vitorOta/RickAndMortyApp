@@ -14,7 +14,7 @@ Android project to study
 - Retrofit
 - Kotlin Coroutines
 - Gson
-- Android Components (Room, ViewModel, LiveData)
+- Jetpack Components (Room, ViewModel, LiveData, Navigation)
 - Timber
 - Fresco
 
