@@ -11,7 +11,7 @@ import com.vitorota.rickandmorty.utils.asyncAwait
  * @since 24/01/2019
  */
 class ListCharacterViewModel
-    (private var useCase: ListCharactersUseCase) : BaseViewModel<List<Character>>() {
+    (private val useCase: ListCharactersUseCase) : BaseViewModel<List<Character>>() {
     suspend fun loadCharacters() {
         doWorkWithProgress {
             asyncAwait {

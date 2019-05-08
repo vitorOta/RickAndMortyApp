@@ -10,7 +10,7 @@ import com.vitorota.rickandmorty.features.BaseViewModel
  * @since 12/02/2019
  */
 class CharacterDetailsViewModel(
-    private var useCase: GetCharacterUseCase
+    private val useCase: GetCharacterUseCase
 ) : BaseViewModel<Character?>() {
 
     suspend fun loadData(characterId: Int) {
