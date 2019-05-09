@@ -1,6 +1,8 @@
 package com.vitorota.rickandmorty.features.character.details
 
+import android.os.Build
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,8 +26,22 @@ class CharacterDetailsFragment : BaseFragment() {
 
     private lateinit var adapter: CharacterDataAdapter
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        inflater.inflate(R.layout.fragment_character_details, container, false)
+        inflater.inflate(R.layout.fragment_character_details, container, false).apply {
+            args.headerTransitionName?.let {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    findViewById<View>(R.id.characterDetails_sdvImage).transitionName = it
+                }
+            }
+        }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupView()
@@ -33,7 +49,7 @@ class CharacterDetailsFragment : BaseFragment() {
         setupObservers()
 
         if (!mViewModel.triedLoadAtLeastOnce) {
-            val characterId = args.CHARACTERID
+            val characterId = args.id
             launchUI {
                 mViewModel.loadData(characterId)
             }
@@ -52,10 +68,12 @@ class CharacterDetailsFragment : BaseFragment() {
         adapter = CharacterDataAdapter()
         characterDetails_rvData.adapter = adapter
         characterDetails_rvData.layoutManager = LinearLayoutManager(context)
-        characterDetails_sdvImage.setImageURI(args.PICTUREURI)
-        args.CHARACTERNAME?.let {
+
+        args.name?.let {
             characterDetails_collapsingToolbar.title = it
         }
+
+        characterDetails_sdvImage.setImageURI(args.pictureUri)
     }
 
     private fun setupObservers() {

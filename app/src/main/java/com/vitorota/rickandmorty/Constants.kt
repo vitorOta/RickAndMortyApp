@@ -8,3 +8,5 @@ package com.vitorota.rickandmorty
  */
 
 const val RETROFIT_CACHE_SIZE = 1024L * 1024 * 7
+
+const val TRANSITION_PREFIX_HEADER_IMAGE = "header.image."

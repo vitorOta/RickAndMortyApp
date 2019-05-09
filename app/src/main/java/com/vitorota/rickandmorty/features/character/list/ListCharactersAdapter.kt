@@ -1,5 +1,6 @@
 package com.vitorota.rickandmorty.features.character.list
 
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +18,7 @@ import kotlinx.android.synthetic.main.item_character.view.*
  * @since 24/01/2019
  */
 class ListCharactersAdapter(
-    private val onItemClicked: (Character) -> Unit
+    private val onItemClicked: (item: Character, sharedElement: View) -> Unit
 ) : ListAdapter<Character, CharacterViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
@@ -30,9 +31,12 @@ class ListCharactersAdapter(
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
         val character = getItem(position)
         with(holder.itemView) {
-            setOnClickListener { onItemClicked(character) }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                sdvImage.transitionName = context.getString(R.string.transition_header_image, character.id)
+            }
             tvName.text = character.name
             sdvImage.setImageURI(character.image)
+            setOnClickListener { onItemClicked(character, sdvImage) }
         }
     }
 

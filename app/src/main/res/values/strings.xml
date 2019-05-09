@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">RickAndMorty</string>
 
+    <!-- Transition name -->
+    <string name="transition_header_image">header_image_%d</string>
+    <!-- ****************************** -->
     <!--  Fragment labels (for nav_graph) -->
     <string name="title_listCharactersFragment">Characters</string>
     <string name="title_characterDetailsFragment">Details</string>

@@ -1,7 +1,9 @@
 package com.vitorota.rickandmorty.features.character.list
 
+import android.os.Build
 import android.os.Bundle
 import android.view.*
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.vitorota.rickandmorty.R
@@ -67,14 +69,25 @@ class ListCharactersFragment : BaseFragment() {
         adapter.submitList(data)
     }
 
-    private fun showCharacterDetails(character: Character) {
+    private fun showCharacterDetails(character: Character, sharedView: View) {
         val direction =
+
             ListCharactersFragmentDirections.actionListCharactersFragmentToCharacterDetailsFragment(
                 character.id,
                 character.name,
-                character.image
+                character.image,
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) sharedView.transitionName else null
             )
-        findNavController().navigate(direction)
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val extras = FragmentNavigatorExtras(
+                sharedView to sharedView.transitionName
+            )
+            findNavController().navigate(direction, extras)
+        } else {
+            findNavController().navigate(direction)
+        }
     }
 
     override fun showProgress() {
