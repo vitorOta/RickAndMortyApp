@@ -23,3 +23,12 @@ Android project to study
 - JUnit
 - Mockk
 - MockWebServer
+
+
+<hr/>
+
+### TODO
+- [ ] Add Pagination
+- [ ] Implement "Favorites"
+- [ ] List/Details Episodes
+- [ ] List/Details Locations
