@@ -59,6 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:paddingTop="40dp"/>
         <!--TODO change this padding top-->
     </androidx.core.widget.NestedScrollView>

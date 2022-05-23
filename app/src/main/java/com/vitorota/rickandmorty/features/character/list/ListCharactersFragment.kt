@@ -3,12 +3,11 @@ package com.vitorota.rickandmorty.features.character.list
 import android.os.Bundle
 import android.view.*
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import com.vitorota.rickandmorty.R
 import com.vitorota.rickandmorty.data.character.entity.Character
+import com.vitorota.rickandmorty.databinding.FragmentListCharactersBinding
 import com.vitorota.rickandmorty.features.BaseFragment
 import com.vitorota.rickandmorty.utils.launchUI
-import kotlinx.android.synthetic.main.fragment_list_characters.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListCharactersFragment : BaseFragment() {
@@ -17,9 +16,16 @@ class ListCharactersFragment : BaseFragment() {
 
     private val mViewModel: ListCharacterViewModel by viewModel()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    private lateinit var binding: FragmentListCharactersBinding
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         setHasOptionsMenu(true)
-        return inflater.inflate(R.layout.fragment_list_characters, container, false)
+        binding = FragmentListCharactersBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,11 +62,10 @@ class ListCharactersFragment : BaseFragment() {
     }
 
     private fun setupView() {
-        listCharacters_rvCharacters.layoutManager = GridLayoutManager(context, 3)
         adapter = ListCharactersAdapter(this::showCharacterDetails)
-        listCharacters_rvCharacters.adapter = adapter
+        binding.listCharactersRvCharacters.adapter = adapter
 
-        listCharacters_swipeRefresh.setOnRefreshListener { retrieveData() }
+        binding.listCharactersSwipeRefresh.setOnRefreshListener { retrieveData() }
     }
 
     private fun handleData(data: List<Character>) {
@@ -78,11 +83,11 @@ class ListCharactersFragment : BaseFragment() {
     }
 
     override fun showProgress() {
-        listCharacters_swipeRefresh.isRefreshing = true
+        binding.listCharactersSwipeRefresh.isRefreshing = true
     }
 
     override fun hideProgress() {
-        listCharacters_swipeRefresh.isRefreshing = false
+        binding.listCharactersSwipeRefresh.isRefreshing = false
     }
 
     //TODO give a better to the user when occur an error while loading data

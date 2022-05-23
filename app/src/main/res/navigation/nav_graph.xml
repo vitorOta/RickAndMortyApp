@@ -19,14 +19,14 @@
             android:label="@string/title_characterDetailsFragment"
             tools:layout="@layout/fragment_character_details">
         <argument
-                android:name="CHARACTER_ID"
+                android:name="characterId"
                 app:argType="integer"/>
         <argument
-                android:name="CHARACTER_NAME"
+                android:name="characterName"
                 app:argType="string"
                 app:nullable="true"/>
         <argument
-                android:name="PICTURE_URI"
+                android:name="pictureUri"
                 app:argType="string"
                 app:nullable="true"/>
     </fragment>

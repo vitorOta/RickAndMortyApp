@@ -14,8 +14,6 @@ android {
     defaultConfig {
         minSdkVersion config["androidMinSdkVersion"]
         targetSdkVersion config["androidTargetSdkVersion"]
-        versionCode config["androidVersionCode"]
-        versionName config["androidVersionName"]
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -26,6 +24,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    namespace 'com.vitorota.rickandmorty.data'
 
 }
 

@@ -1,15 +1,13 @@
 package com.vitorota.rickandmorty.features.character.list
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil.ItemCallback
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.vitorota.rickandmorty.R
 import com.vitorota.rickandmorty.data.character.entity.Character
+import com.vitorota.rickandmorty.databinding.ItemCharacterBinding
 import com.vitorota.rickandmorty.features.character.list.ListCharactersAdapter.CharacterViewHolder
-import kotlinx.android.synthetic.main.item_character.view.*
 
 /**
  *
@@ -21,26 +19,27 @@ class ListCharactersAdapter(
 ) : ListAdapter<Character, CharacterViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_character, parent, false)
-        val holder = CharacterViewHolder(view)
-
-        return holder
+        val inflater = LayoutInflater.from(parent.context)
+        return CharacterViewHolder(ItemCharacterBinding.inflate(inflater, parent, false))
     }
 
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
         val character = getItem(position)
-        with(holder.itemView) {
-            setOnClickListener { onItemClicked(character) }
+        with(holder.binding) {
+            root.setOnClickListener { onItemClicked(character) }
             tvName.text = character.name
             sdvImage.setImageURI(character.image)
         }
     }
 
-    class CharacterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    class CharacterViewHolder(val binding: ItemCharacterBinding) :
+        RecyclerView.ViewHolder(binding.root)
 }
 
 object DIFF_CALLBACK : ItemCallback<Character>() {
-    override fun areItemsTheSame(oldItem: Character, newItem: Character): Boolean = oldItem.id == newItem.id
+    override fun areItemsTheSame(oldItem: Character, newItem: Character): Boolean =
+        oldItem.id == newItem.id
 
-    override fun areContentsTheSame(oldItem: Character, newItem: Character): Boolean = oldItem == newItem
+    override fun areContentsTheSame(oldItem: Character, newItem: Character): Boolean =
+        oldItem == newItem
 }
