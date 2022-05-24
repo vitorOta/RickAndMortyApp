@@ -28,8 +28,10 @@ class RickAndMortyApp : Application() {
         startKoin {
             androidContext(this@RickAndMortyApp)
             modules(
-                NetworkModule,
-                CharacterModule
+                listOf(
+                    NetworkModule,
+                    CharacterModule
+                )
             )
         }
     }

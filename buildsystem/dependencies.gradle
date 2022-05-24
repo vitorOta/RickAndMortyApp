@@ -19,11 +19,15 @@ ext {
     retrofitVersion = '2.5.0'
     gsonVersion = '2.8.5'
     lifecycleVersion = '2.0.0'
-    koinVersion = '2.0.0-GA'
+    koinVersion = '2.0.1'
     kotlinCoroutinesVersion = '1.1.0'
     kotlinCoroutinesRetrofitAdapterVersion = '0.9.2'
     timberVersion = '4.7.1'
     frescoVersion = '2.6.0'
+    composeVersion = '1.1.1'
+    composeActivityVersion = '1.4.0'
+    accompanistVersion = '0.23.1'
+    coilVersion =  '2.1.0'
 
     //testing
     jUnitVersion = '4.12'
@@ -60,13 +64,22 @@ ext {
             //parsing
             gson                           : "com.google.code.gson:gson:$gsonVersion",
             //di
-            koin                           : "org.koin:koin-android:$koinVersion",
-            koinViewModel                  : "org.koin:koin-androidx-viewmodel:$koinVersion",
+            koin                           : "io.insert-koin:koin-android:$koinVersion",
+            koinViewModel                  : "io.insert-koin:koin-androidx-viewmodel:$koinVersion",
             //logging
             timber                         : "com.jakewharton.timber:timber:$timberVersion",
             //imageLoader
             fresco                         : "com.facebook.fresco:fresco:$frescoVersion",
 
+            //compose
+            composeActivity:"androidx.activity:activity-compose:$composeActivityVersion",
+            composeMaterialDesign:"androidx.compose.material:material:$composeVersion",
+            composeAnimation:"androidx.compose.animation:animation:$composeVersion",
+            composeTools:"androidx.compose.ui:ui-tooling:$composeVersion",
+            composeLiveData:"androidx.compose.runtime:runtime-livedata:$composeVersion",
+            accompanistAppCompatTheme:"com.google.accompanist:accompanist-appcompat-theme:$accompanistVersion",
+            accompanistSwipeRefresh:"com.google.accompanist:accompanist-swiperefresh:$accompanistVersion",
+            coilCompose:"io.coil-kt:coil-compose:$coilVersion",
     ]
 
     allKaptDependencies = [
@@ -105,6 +118,14 @@ ext {
             allDependencies.lifecycle,
             allDependencies.navigationFragment,
             allDependencies.navigationUI,
+            allDependencies.composeActivity,
+            allDependencies.composeMaterialDesign,
+            allDependencies.composeAnimation,
+            allDependencies.composeTools,
+            allDependencies.composeLiveData,
+            allDependencies.accompanistAppCompatTheme,
+            allDependencies.accompanistSwipeRefresh,
+            allDependencies.coilCompose,
     ]
     appKapt = [
     ]

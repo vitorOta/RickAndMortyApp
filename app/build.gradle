@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 android {
 
     def config = rootProject.ext //rootProject.extensions.getByName("ext")
 
+    namespace 'com.vitorota.rickandmorty'
     compileSdkVersion config["androidCompileSdkVersion"] //use brackets to better visualization
+
     defaultConfig {
         minSdkVersion config["androidMinSdkVersion"]
         targetSdkVersion config["androidTargetSdkVersion"]
@@ -20,6 +20,19 @@ android {
 
     buildFeatures {
         viewBinding true
+        compose true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion config.composeVersion
     }
 
     buildTypes {
@@ -28,7 +41,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    namespace 'com.vitorota.rickandmorty'
 }
 
 dependencies {

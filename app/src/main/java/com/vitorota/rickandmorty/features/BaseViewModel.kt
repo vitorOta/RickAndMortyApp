@@ -5,6 +5,9 @@ import com.vitorota.rickandmorty.R
 import com.vitorota.rickandmorty.data.util.exceptions.DataHttpException
 import com.vitorota.rickandmorty.data.util.exceptions.DataIOException
 import com.vitorota.rickandmorty.utils.SingleLiveEvent
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import timber.log.Timber
 
 /**
@@ -24,8 +27,13 @@ open class BaseViewModel<T> : ViewModel() {
     var triedLoadAtLeastOnce: Boolean = false
         private set
 
+    //for compose
+    private val _isRefreshingFlow = MutableStateFlow(false)
+    val isRefreshingFlow = _isRefreshingFlow as StateFlow<Boolean>
+
     protected suspend fun doWorkWithProgress(loadData: suspend () -> T) {
         showProgressEvent.call()
+        _isRefreshingFlow.update { true }
         triedLoadAtLeastOnce = true
         try {
             _data.value = loadData()
@@ -42,6 +50,7 @@ open class BaseViewModel<T> : ViewModel() {
             }
         } finally {
             hideProgressEvent.call()
+            _isRefreshingFlow.update { false }
         }
     }
 

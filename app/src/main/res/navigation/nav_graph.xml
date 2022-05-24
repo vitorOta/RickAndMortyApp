@@ -7,8 +7,7 @@
     <fragment
             android:id="@+id/listCharactersFragment"
             android:name="com.vitorota.rickandmorty.features.character.list.ListCharactersFragment"
-            android:label="@string/title_listCharactersFragment"
-            tools:layout="@layout/fragment_list_characters">
+            android:label="@string/title_listCharactersFragment">
         <action
                 android:id="@+id/action_listCharactersFragment_to_characterDetailsFragment"
                 app:destination="@+id/characterDetailsFragment"/>

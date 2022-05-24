@@ -3,7 +3,7 @@ apply from: 'buildsystem/dependencies.gradle'
 
 buildscript {
 
-    ext.kotlinVersion = '1.6.21'
+    ext.kotlinVersion = '1.6.10'
     ext.navigationVersion = '2.4.2'
 
     repositories {
