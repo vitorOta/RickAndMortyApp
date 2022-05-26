@@ -25,14 +25,15 @@ url	string (url)	Link to the character's own URL endpoint.
 */
 
 data class Character(
-    var id: Int,
-    var name: String,
-    var status: String,
-    var species: String,
-    var type: String,
-    var gender: String,
-    var origin: Episode?,
-    var location: Location?,
-    var image: String,
-    var episode: List<String>?
+    val id: Int,
+    val name: String,
+    val status: String,
+    val species: String,
+    val type: String,
+    val gender: String,
+    val origin: Episode?,
+    val location: Location?,
+    val image: String,
+    val episode: List<String>?,
+    val isFavorite:Boolean = false
 )

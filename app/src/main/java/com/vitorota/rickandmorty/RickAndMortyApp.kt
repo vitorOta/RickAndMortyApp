@@ -1,7 +1,6 @@
 package com.vitorota.rickandmorty
 
 import android.app.Application
-import com.facebook.drawee.backends.pipeline.Fresco
 import com.vitorota.rickandmorty.di.CharacterModule
 import com.vitorota.rickandmorty.di.NetworkModule
 import org.koin.android.ext.koin.androidContext
@@ -19,7 +18,6 @@ class RickAndMortyApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        setupFresco()
         setupTimber()
         setupKoin()
     }
@@ -34,15 +32,6 @@ class RickAndMortyApp : Application() {
                 )
             )
         }
-    }
-
-    private fun setupFresco() {
-//        val config = ImagePipelineConfig.newBuilder(this)
-//            .setBitmapsConfig(Bitmap.Config.RGB_565)
-//            .setDownsampleEnabled(true)
-//            .build()
-//        Fresco.initialize(this, config)
-        Fresco.initialize(this)
     }
 
     private fun setupTimber() {
