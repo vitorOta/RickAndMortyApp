@@ -115,7 +115,7 @@ class CharacterDetailsFragment : BaseFragment() {
             text = text, fontSize = 20.sp, modifier = Modifier
                 .padding(start = 16.dp)
                 .background(
-                    Color.LightGray.copy(alpha = 10.9f)
+                    Color.LightGray.copy(alpha = 0.9f)
                 )
         )
     }
