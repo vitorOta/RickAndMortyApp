@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
@@ -27,6 +28,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.compose.AsyncImage
 import com.google.accompanist.appcompattheme.AppCompatTheme
@@ -62,7 +64,7 @@ class CharacterDetailsFragment : BaseFragment() {
         val scrollState = rememberScrollState()
 
         AppCompatTheme {
-            Surface(modifier = Modifier.scrollable(scrollState,Orientation.Vertical)) {
+            Surface(modifier = Modifier.scrollable(scrollState, Orientation.Vertical)) {
                 character.value?.let {
                     CharacterDetail(it)
                 }
@@ -89,6 +91,15 @@ class CharacterDetailsFragment : BaseFragment() {
                         contentDescription = null
                     )
                 }
+
+                Icon(
+                    imageVector = ImageVector.vectorResource(id = androidx.appcompat.R.drawable.abc_ic_ab_back_material),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .align(Alignment.TopStart)
+                        .padding(8.dp)
+                        .clickable { findNavController().popBackStack() },
+                )
             }
             LazyColumn {
                 items(character.infoAsList()) { info ->
