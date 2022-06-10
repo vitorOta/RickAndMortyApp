@@ -23,6 +23,7 @@ ext {
     composeActivityVersion = '1.4.0'
     accompanistVersion = '0.23.1'
     coilVersion =  '2.1.0'
+    glideVersion = '4.12.0'
 
     //testing
     jUnitVersion = '4.12'
@@ -69,6 +70,8 @@ ext {
             accompanistAppCompatTheme:"com.google.accompanist:accompanist-appcompat-theme:$accompanistVersion",
             accompanistSwipeRefresh:"com.google.accompanist:accompanist-swiperefresh:$accompanistVersion",
             coilCompose:"io.coil-kt:coil-compose:$coilVersion",
+
+            glide:"com.github.bumptech.glide:glide:$glideVersion",
     ]
 
     allKaptDependencies = [
@@ -110,6 +113,7 @@ ext {
             allDependencies.accompanistAppCompatTheme,
             allDependencies.accompanistSwipeRefresh,
             allDependencies.coilCompose,
+            allDependencies.glide,
     ]
     appKapt = [
     ]
