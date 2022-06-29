@@ -16,4 +16,6 @@
     <string name="title_characterDetailsFragment">Details</string>
 
     <string name="widget_randomcharacter_description">Random Character</string>
+
+    <string name="widget_detailedcharacter_description">Detailed Character</string>
 </resources>

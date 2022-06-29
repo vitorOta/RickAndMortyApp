@@ -1,4 +1,4 @@
-package com.vitorota.rickandmorty.widgets
+package com.vitorota.rickandmorty.widgets.randomcharacter
 
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
@@ -9,6 +9,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.AppWidgetTarget
 import com.vitorota.rickandmorty.R
 import com.vitorota.rickandmorty.features.character.details.CharacterDetailsFragmentArgs
+import com.vitorota.rickandmorty.widgets.loadAsyncImage
+import timber.log.Timber
 import kotlin.random.Random.Default.nextInt
 
 class RandomCharacterAppWidgetProvider : AppWidgetProvider() {
@@ -17,18 +19,15 @@ class RandomCharacterAppWidgetProvider : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray?
     ) {
-        appWidgetIds?.forEach { viewId ->
+        appWidgetIds?.forEach { widgetId ->
 
             val remoteView = RemoteViews(context.packageName, R.layout.widget_random_character)
 
 //TODO change to dynamic instead of hardcoded
             val characterId = nextInt(826) + 1
 //image
-            val widgetTarget = AppWidgetTarget(context, R.id.widget_imageView, remoteView, viewId)
-            Glide.with(context.applicationContext)
-                .asBitmap()
-                .load("https://rickandmortyapi.com/api/character/avatar/$characterId.jpeg")
-                .into(widgetTarget)
+            val imageUrl = "https://rickandmortyapi.com/api/character/avatar/$characterId.jpeg"
+            remoteView.loadAsyncImage(context,R.id.widget_imageView, widgetId,imageUrl)
 
             //click
             val pendingIntent = NavDeepLinkBuilder(context)
@@ -38,19 +37,19 @@ class RandomCharacterAppWidgetProvider : AppWidgetProvider() {
                 .createPendingIntent()
             remoteView.setOnClickPendingIntent(R.id.widget_imageView, pendingIntent)
 
-            appWidgetManager.updateAppWidget(viewId, remoteView)
+            appWidgetManager.updateAppWidget(widgetId, remoteView)
         }
     }
 
     override fun onDeleted(context: Context?, appWidgetIds: IntArray?) {
-        super.onDeleted(context, appWidgetIds)
+        Timber.d("Appwidget deleted")
     }
 
     override fun onEnabled(context: Context?) {
-        super.onEnabled(context)
+        Timber.d("Appwidget enabled")
     }
 
     override fun onDisabled(context: Context?) {
-        super.onDisabled(context)
+        Timber.d("Appwidget disabled")
     }
 }
